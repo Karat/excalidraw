@@ -157,8 +157,13 @@ const initializeScene = async (opts: {
     scrollToContent?: boolean;
   } = await loadScene(null, null, localDataState);
 
+  console.log('scene', scene);
+
   let roomLinkData = customRoomLinkData;
   const isExternalScene = !!(id || jsonBackendMatch || roomLinkData);
+
+  console.log('isExternalScene', isExternalScene);
+
   if (isExternalScene) {
     if (
       // don't prompt if scene is empty
@@ -225,6 +230,8 @@ const initializeScene = async (opts: {
     const { excalidrawAPI } = opts;
     opts.collabAPI.setUsername(customUsername);
     const scene = await opts.collabAPI.startCollaboration(roomLinkData);
+
+    console.log('scene', scene);
 
     return {
       // when collaborating, the state may have already been updated at this
@@ -305,6 +312,8 @@ const ExcalidrawWrapper = () => {
     return isCollaborationLink(window.location.href);
   });
 
+  console.log('isCollaborating', isCollaborating);
+
   useHandleLibrary({
     excalidrawAPI,
     getInitialLibraryItems: getLibraryItemsFromStorage,
@@ -383,6 +392,7 @@ const ExcalidrawWrapper = () => {
     };
 
     initializeScene({ collabAPI, excalidrawAPI }).then(async (data) => {
+      console.log('data', data)
       loadImages(data, /* isInitialLoad */ true);
       initialStatePromiseRef.current.promise.resolve(data.scene);
     });

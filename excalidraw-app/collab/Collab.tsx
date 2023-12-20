@@ -413,6 +413,8 @@ class Collab extends PureComponent<Props, CollabState> {
       /* webpackChunkName: "socketIoClient" */ "socket.io-client"
     );
 
+    console.log('socketIOClient', socketIOClient);
+
     const fallbackInitializationHandler = () => {
       this.initializeRoom({
         roomLinkData: existingRoomLinkData,
@@ -425,6 +427,7 @@ class Collab extends PureComponent<Props, CollabState> {
 
     try {
       const socketServerData = await getCollabServer(customCollabServerUrl);
+      console.log('socketServerData', socketServerData);
 
       this.portal.socket = this.portal.open(
         socketIOClient(socketServerData.url, {
@@ -551,6 +554,8 @@ class Collab extends PureComponent<Props, CollabState> {
         fetchScene: true,
         roomLinkData: existingRoomLinkData,
       });
+
+      console.log('sceneData', sceneData);
       scenePromise.resolve(sceneData);
     });
 
@@ -588,6 +593,9 @@ class Collab extends PureComponent<Props, CollabState> {
           roomLinkData.roomKey,
           this.portal.socket,
         );
+
+        console.log('elements', elements);
+
         if (elements) {
           this.setLastBroadcastedOrReceivedSceneVersion(
             getSceneVersion(elements),
