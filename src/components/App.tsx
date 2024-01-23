@@ -375,6 +375,7 @@ import {
   setCursorForShape,
 } from "../cursor";
 import { Emitter } from "../emitter";
+import { exportToBlob } from "../packages/utils";
 
 const AppContext = React.createContext<AppClassProperties>(null!);
 const AppPropsContext = React.createContext<AppProps>(null!);
@@ -573,6 +574,7 @@ class App extends React.Component<AppProps, AppState> {
 
     if (excalidrawAPI) {
       const api: ExcalidrawImperativeAPI = {
+        exportToBlob: this.exportToBlob,
         updateScene: this.updateScene,
         updateLibrary: this.library.updateLibrary,
         addFiles: this.addFiles,
@@ -2915,6 +2917,19 @@ class App extends React.Component<AppProps, AppState> {
       this.addNewImagesToImageCache();
     },
   );
+
+  public exportToBlob = async <K extends keyof AppState>(sceneData: {
+    elements: SceneData["elements"];
+    appState: Pick<AppState, K>;
+    files: BinaryFiles | null;
+  }) => {
+    const blob = await exportToBlob({
+      elements: sceneData.elements as ExcalidrawElement[],
+      appState: sceneData.appState,
+      files: sceneData.files,
+    });
+    return blob;
+  };
 
   public updateScene = withBatchedUpdates(
     <K extends keyof AppState>(sceneData: {
