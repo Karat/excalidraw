@@ -245,6 +245,23 @@ class Collab extends PureComponent<Props, CollabState> {
         this.excalidrawAPI.getAppState(),
       );
 
+      const blob = await this.excalidrawAPI.exportToBlob({
+        elements: syncableElements,
+        appState: this.excalidrawAPI.getAppState(),
+        files: this.excalidrawAPI.getFiles(),
+      });
+
+      const response = await fetch(
+        `${customCollabServerUrl}/signed_url?roomId=${this.portal.roomId}`,
+      );
+      const data = await response.json();
+
+      await fetch(data.url, {
+        method: "PUT",
+        headers: { "Content-Type": "image/png" },
+        body: blob,
+      });
+
       if (this.isCollaborating() && savedData && savedData.reconciledElements) {
         this.handleRemoteSceneUpdate(
           this.reconcileElements(savedData.reconciledElements),
