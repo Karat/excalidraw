@@ -71,7 +71,7 @@ import { resetBrowserStateVersions } from "../data/tabSync";
 import { LocalData } from "../data/LocalData";
 import { atom } from "jotai";
 import { appJotaiStore } from "../app-jotai";
-import { customCollabServerUrl } from "..";
+import { customCollabServerUrl, isInterview, studioReference } from "..";
 
 export const collabAPIAtom = atom<CollabAPI | null>(null);
 export const collabDialogShownAtom = atom(false);
@@ -252,7 +252,9 @@ class Collab extends PureComponent<Props, CollabState> {
       });
 
       const response = await fetch(
-        `${customCollabServerUrl}/signed_url?roomId=${this.portal.roomId}`,
+        `${customCollabServerUrl}/${
+          isInterview ? "interview" : "pad"
+        }/${studioReference}/signed_url?roomId=${this.portal.roomId}`,
       );
       const data = await response.json();
 

@@ -29,9 +29,11 @@ function App() {
           roomKey: "yx8WgrzkcceYyZFXAo4_9g", // arbitrary constant key
         }}
         username={"Karat Engineer"}
-        token="placeholder"
+        firebaseToken="placeholder"
         theme="dark"
         excalidrawAPIRefCallback={excalidrawAPIRefCallback}
+        isInterview={true}
+        studioReference={"1"}
       />
     </StrictMode>
   );
