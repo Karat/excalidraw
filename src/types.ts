@@ -388,6 +388,7 @@ export interface ExcalidrawProps {
     button: "down" | "up";
     pointersMap: Gesture["pointers"];
   }) => void;
+  onCollabRoomSave?: () => void;
   onPaste?: (
     data: ClipboardData,
     event: ClipboardEvent | null,

@@ -9,6 +9,7 @@ import {
   InitializedExcalidrawImageElement,
 } from "../../src/element/types";
 import {
+  exportToBlob,
   getSceneVersion,
   restoreElements,
 } from "../../src/packages/excalidraw/index";
@@ -90,6 +91,7 @@ export interface CollabAPI {
   /** function so that we can access the latest value from stale callbacks */
   isCollaborating: () => boolean;
   onPointerUpdate: CollabInstance["onPointerUpdate"];
+  onCollabRoomSave: CollabInstance["onCollabRoomSave"];
   startCollaboration: CollabInstance["startCollaboration"];
   stopCollaboration: CollabInstance["stopCollaboration"];
   syncElements: CollabInstance["syncElements"];
@@ -163,6 +165,7 @@ class Collab extends PureComponent<Props, CollabState> {
     const collabAPI: CollabAPI = {
       isCollaborating: this.isCollaborating,
       onPointerUpdate: this.onPointerUpdate,
+      onCollabRoomSave: this.onCollabRoomSave,
       startCollaboration: this.startCollaboration,
       syncElements: this.syncElements,
       fetchImageFilesFromFirebase: this.fetchImageFilesFromFirebase,
@@ -245,24 +248,7 @@ class Collab extends PureComponent<Props, CollabState> {
         this.excalidrawAPI.getAppState(),
       );
 
-      const blob = await this.excalidrawAPI.exportToBlob({
-        elements: syncableElements,
-        appState: this.excalidrawAPI.getAppState(),
-        files: this.excalidrawAPI.getFiles(),
-      });
-
-      const response = await fetch(
-        `${customCollabServerUrl}/${
-          isInterview ? "interview" : "pad"
-        }/${studioReference}/signed_url?roomId=${this.portal.roomId}`,
-      );
-      const data = await response.json();
-
-      await fetch(data.url, {
-        method: "PUT",
-        headers: { "Content-Type": "image/png" },
-        body: blob,
-      });
+      this.onCollabRoomSave();
 
       if (this.isCollaborating() && savedData && savedData.reconciledElements) {
         this.handleRemoteSceneUpdate(
@@ -779,6 +765,8 @@ class Collab extends PureComponent<Props, CollabState> {
     },
     CURSOR_SYNC_TIMEOUT,
   );
+
+  onCollabRoomSave = () => {};
 
   onIdleStateChange = (userState: UserIdleState) => {
     this.portal.broadcastIdleChange(userState);
