@@ -239,14 +239,11 @@ class Collab extends PureComponent<Props, CollabState> {
     syncableElements: readonly SyncableExcalidrawElement[],
   ) => {
     try {
-      const appState = this.excalidrawAPI.getAppState();
       const savedData = await saveToFirebase(
         this.portal,
         syncableElements,
-        appState,
+        this.excalidrawAPI.getAppState(),
       );
-
-      await onCollabRoomSave(syncableElements, appState);
 
       if (this.isCollaborating() && savedData && savedData.reconciledElements) {
         this.handleRemoteSceneUpdate(
@@ -262,6 +259,8 @@ class Collab extends PureComponent<Props, CollabState> {
       });
       console.error(error);
     }
+
+    await onCollabRoomSave(syncableElements, this.excalidrawAPI.getAppState());
   };
 
   stopCollaboration = (keepRemoteState = true) => {
