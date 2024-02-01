@@ -259,7 +259,6 @@ class Collab extends PureComponent<Props, CollabState> {
       });
       console.error(error);
     }
-
     await onCollabRoomSave(syncableElements, this.excalidrawAPI.getAppState());
   };
 
