@@ -4,7 +4,8 @@ import ExcalidrawApp from "../excalidraw-app";
 import { registerSW } from "virtual:pwa-register";
 
 import "../excalidraw-app/sentry";
-import { ExcalidrawImperativeAPI } from "./types";
+import { AppState, ExcalidrawImperativeAPI } from "./types";
+import { SyncableExcalidrawElement } from "../excalidraw-app/data";
 window.__EXCALIDRAW_SHA__ = import.meta.env.VITE_APP_GIT_SHA;
 const rootElement = document.getElementById("root")!;
 const root = createRoot(rootElement);
@@ -16,6 +17,16 @@ function App() {
     useState<ExcalidrawImperativeAPI | null>(null);
   const excalidrawAPIRefCallback = useCallback(
     (value: ExcalidrawImperativeAPI) => setExcalidrawAPI(value),
+    [],
+  );
+
+  const onCollabRoomSave = useCallback(
+    async (
+      elements: readonly SyncableExcalidrawElement[],
+      appState: AppState,
+    ) => {
+      console.log("collab room save");
+    },
     [],
   );
 
@@ -34,6 +45,7 @@ function App() {
         excalidrawAPIRefCallback={excalidrawAPIRefCallback}
         isInterview={true}
         studioReference={"1"}
+        onCollabRoomSave={onCollabRoomSave}
       />
     </StrictMode>
   );

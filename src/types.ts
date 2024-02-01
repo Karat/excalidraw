@@ -388,7 +388,6 @@ export interface ExcalidrawProps {
     button: "down" | "up";
     pointersMap: Gesture["pointers"];
   }) => void;
-  onCollabRoomSave?: () => void;
   onPaste?: (
     data: ClipboardData,
     event: ClipboardEvent | null,
@@ -609,7 +608,6 @@ export type PointerDownState = Readonly<{
 type UnsubscribeCallback = () => void;
 
 export type ExcalidrawImperativeAPI = {
-  exportToBlob: InstanceType<typeof App>["exportToBlob"];
   updateScene: InstanceType<typeof App>["updateScene"];
   updateLibrary: InstanceType<typeof Library>["updateLibrary"];
   resetScene: InstanceType<typeof App>["resetScene"];

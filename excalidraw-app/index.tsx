@@ -50,7 +50,12 @@ import Collab, {
   isCollaboratingAtom,
   isOfflineAtom,
 } from "./collab/Collab";
-import { exportToBackend, isCollaborationLink, loadScene } from "./data";
+import {
+  SyncableExcalidrawElement,
+  exportToBackend,
+  isCollaborationLink,
+  loadScene,
+} from "./data";
 import {
   getLibraryItemsFromStorage,
   importFromLocalStorage,
@@ -686,7 +691,6 @@ const ExcalidrawWrapper = () => {
         initialData={initialStatePromiseRef.current.promise}
         isCollaborating={isCollaborating}
         onPointerUpdate={collabAPI?.onPointerUpdate}
-        onCollabRoomSave={collabAPI?.onCollabRoomSave}
         UIOptions={{
           canvasActions: {
             toggleTheme: true,
@@ -783,6 +787,10 @@ let customRoomLinkData: RoomLinkData;
 let customUsername: string;
 let customTheme: Theme;
 let externalExcalidrawRefCallback: SetExcalidrawAPI;
+let onCollabRoomSave: (
+  elements: readonly SyncableExcalidrawElement[],
+  appState: AppState,
+) => Promise<void>;
 let customFirebaseToken: string;
 let isInterview: boolean;
 let studioReference: string;
@@ -797,6 +805,10 @@ const ExcalidrawApp: React.FC<{
   firebaseToken: string;
   isInterview: boolean;
   studioReference: string;
+  onCollabRoomSave: (
+    elements: readonly SyncableExcalidrawElement[],
+    appState: AppState,
+  ) => Promise<void>;
 }> = memo((props) => {
   customFirebaseConfig = props.firebaseConfig;
   customCollabServerUrl = props.collabServerUrl;
@@ -807,6 +819,7 @@ const ExcalidrawApp: React.FC<{
   customFirebaseToken = props.firebaseToken;
   isInterview = props.isInterview;
   studioReference = props.studioReference;
+  onCollabRoomSave = props.onCollabRoomSave;
   return (
     <TopErrorBoundary>
       <Provider unstable_createStore={() => appJotaiStore}>
@@ -822,5 +835,6 @@ export {
   customFirebaseToken,
   isInterview,
   studioReference,
+  onCollabRoomSave,
 };
 export default ExcalidrawApp;

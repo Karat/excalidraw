@@ -9,7 +9,6 @@ import {
   InitializedExcalidrawImageElement,
 } from "../../src/element/types";
 import {
-  exportToBlob,
   getSceneVersion,
   restoreElements,
 } from "../../src/packages/excalidraw/index";
@@ -72,7 +71,7 @@ import { resetBrowserStateVersions } from "../data/tabSync";
 import { LocalData } from "../data/LocalData";
 import { atom } from "jotai";
 import { appJotaiStore } from "../app-jotai";
-import { customCollabServerUrl, isInterview, studioReference } from "..";
+import { customCollabServerUrl, onCollabRoomSave } from "..";
 
 export const collabAPIAtom = atom<CollabAPI | null>(null);
 export const collabDialogShownAtom = atom(false);
@@ -91,7 +90,6 @@ export interface CollabAPI {
   /** function so that we can access the latest value from stale callbacks */
   isCollaborating: () => boolean;
   onPointerUpdate: CollabInstance["onPointerUpdate"];
-  onCollabRoomSave: CollabInstance["onCollabRoomSave"];
   startCollaboration: CollabInstance["startCollaboration"];
   stopCollaboration: CollabInstance["stopCollaboration"];
   syncElements: CollabInstance["syncElements"];
@@ -165,7 +163,6 @@ class Collab extends PureComponent<Props, CollabState> {
     const collabAPI: CollabAPI = {
       isCollaborating: this.isCollaborating,
       onPointerUpdate: this.onPointerUpdate,
-      onCollabRoomSave: this.onCollabRoomSave,
       startCollaboration: this.startCollaboration,
       syncElements: this.syncElements,
       fetchImageFilesFromFirebase: this.fetchImageFilesFromFirebase,
@@ -242,13 +239,14 @@ class Collab extends PureComponent<Props, CollabState> {
     syncableElements: readonly SyncableExcalidrawElement[],
   ) => {
     try {
+      const appState = this.excalidrawAPI.getAppState();
       const savedData = await saveToFirebase(
         this.portal,
         syncableElements,
-        this.excalidrawAPI.getAppState(),
+        appState,
       );
 
-      this.onCollabRoomSave();
+      await onCollabRoomSave(syncableElements, appState);
 
       if (this.isCollaborating() && savedData && savedData.reconciledElements) {
         this.handleRemoteSceneUpdate(
@@ -765,8 +763,6 @@ class Collab extends PureComponent<Props, CollabState> {
     },
     CURSOR_SYNC_TIMEOUT,
   );
-
-  onCollabRoomSave = () => {};
 
   onIdleStateChange = (userState: UserIdleState) => {
     this.portal.broadcastIdleChange(userState);
