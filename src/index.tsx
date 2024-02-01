@@ -43,8 +43,6 @@ function App() {
         firebaseToken="placeholder"
         theme="dark"
         excalidrawAPIRefCallback={excalidrawAPIRefCallback}
-        isInterview={true}
-        studioReference={"1"}
         onCollabRoomSave={onCollabRoomSave}
       />
     </StrictMode>

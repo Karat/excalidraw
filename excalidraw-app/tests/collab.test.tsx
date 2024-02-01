@@ -80,8 +80,7 @@ describe("collaboration", () => {
         firebaseToken=""
         theme="dark"
         excalidrawAPIRefCallback={() => {}}
-        isInterview={true}
-        studioReference=""
+        onCollabRoomSave={() => Promise.resolve()}
       />,
     );
     // To update the scene with deleted elements before starting collab

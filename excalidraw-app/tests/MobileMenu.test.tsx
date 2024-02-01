@@ -31,8 +31,7 @@ describe("Test MobileMenu", () => {
         firebaseToken=""
         theme="dark"
         excalidrawAPIRefCallback={() => {}}
-        isInterview={true}
-        studioReference=""
+        onCollabRoomSave={() => Promise.resolve()}
       />,
     );
     // @ts-ignore

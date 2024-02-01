@@ -792,8 +792,6 @@ let onCollabRoomSave: (
   appState: AppState,
 ) => Promise<void>;
 let customFirebaseToken: string;
-let isInterview: boolean;
-let studioReference: string;
 
 const ExcalidrawApp: React.FC<{
   firebaseConfig: FirebaseConfig;
@@ -803,8 +801,6 @@ const ExcalidrawApp: React.FC<{
   theme: Theme;
   excalidrawAPIRefCallback: SetExcalidrawAPI;
   firebaseToken: string;
-  isInterview: boolean;
-  studioReference: string;
   onCollabRoomSave: (
     elements: readonly SyncableExcalidrawElement[],
     appState: AppState,
@@ -817,8 +813,6 @@ const ExcalidrawApp: React.FC<{
   customTheme = props.theme;
   externalExcalidrawRefCallback = props.excalidrawAPIRefCallback;
   customFirebaseToken = props.firebaseToken;
-  isInterview = props.isInterview;
-  studioReference = props.studioReference;
   onCollabRoomSave = props.onCollabRoomSave;
   return (
     <TopErrorBoundary>
@@ -833,8 +827,6 @@ export {
   customCollabServerUrl,
   customFirebaseConfig,
   customFirebaseToken,
-  isInterview,
-  studioReference,
   onCollabRoomSave,
 };
 export default ExcalidrawApp;
