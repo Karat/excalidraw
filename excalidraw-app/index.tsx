@@ -37,7 +37,7 @@ function App() {
         firebaseConfig={JSON.parse(import.meta.env.VITE_APP_FIREBASE_CONFIG)}
         collabServerUrl={import.meta.env.VITE_APP_WS_SERVER_URL}
         roomLinkData={{
-          roomId: "nonsense_room-12313123123132",
+          roomId: "localTestRoomId02",
           roomKey: "yx8WgrzkcceYyZFXAo4_9g", // arbitrary constant key
         }}
         username={"Karat Engineer"}

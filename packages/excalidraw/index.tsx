@@ -21,7 +21,6 @@ import LiveCollaborationTrigger from "./components/live-collaboration/LiveCollab
 polyfill();
 
 const ExcalidrawBase = (props: ExcalidrawProps) => {
-  console.log('Rendering ExcalidrawBase why?');
   const {
     onChange,
     initialData,
