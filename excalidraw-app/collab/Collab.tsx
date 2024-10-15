@@ -425,6 +425,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       return JSON.parse(decodedData);
     } catch (error) {
       window.alert(t("alerts.decryptFailed"));
+      console.error(error);
       return {
         type: WS_SUBTYPES.INVALID_RESPONSE,
       };
