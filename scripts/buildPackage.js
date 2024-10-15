@@ -37,64 +37,6 @@ const { sassPlugin } = require("esbuild-sass-plugin");
 //   return files;
 // }
 
-// const browserConfig = {
-//   entryPoints: ["index.tsx"],
-//   bundle: true,
-//   format: "esm",
-//   plugins: [
-//     sassPlugin(),
-//     externalGlobalPlugin({
-//       react: "React",
-//       "react-dom": "ReactDOM",
-//     }),
-//   ],
-//   splitting: true,
-//   loader: {
-//     ".woff2": "file",
-//   },
-// };
-// const createESMBrowserBuild = async () => {
-//   // Development unminified build with source maps
-//   await build({
-//     ...browserConfig,
-//     outdir: "dist/browser/dev",
-//     sourcemap: true,
-//     chunkNames: "excalidraw-assets-dev/[name]-[hash]",
-//     assetNames: "excalidraw-assets-dev/[name]-[hash]",
-//     define: {
-//       "import.meta.env": JSON.stringify({ DEV: true }),
-//     },
-//   });
-
-//   // production minified build without sourcemaps
-//   await build({
-//     ...browserConfig,
-//     outdir: "dist/browser/prod",
-//     minify: true,
-//     chunkNames: "excalidraw-assets/[name]-[hash]",
-//     assetNames: "excalidraw-assets/[name]-[hash]",
-//     define: {
-//       "import.meta.env": JSON.stringify({ PROD: true }),
-//     },
-//   });
-// };
-
-// const BASE_PATH = `${path.resolve(`${__dirname}/..`)}`;
-// const filesinExcalidrawPackage = [
-//   ...getFiles(`${BASE_PATH}/packages/excalidraw`),
-//   `${BASE_PATH}/packages/utils/export.ts`,
-//   `${BASE_PATH}/packages/utils/bbox.ts`,
-//   ...getFiles(`${BASE_PATH}/public/fonts`),
-// ];
-
-// const filesToTransform = filesinExcalidrawPackage.filter((file) => {
-//   return !(
-//     file.includes("/__tests__/") ||
-//     file.includes(".test.") ||
-//     file.includes("/tests/") ||
-//     file.includes("example")
-//   );
-// });
 
 const rawConfig = {
   entryPoints: ["excalidraw-app/App.tsx"],
@@ -151,4 +93,3 @@ const createCJSBuild = async () => {
 // Call the function to create the CJS build
 createCJSBuild();
 createESMRawBuild();
-// createESMBrowserBuild();
