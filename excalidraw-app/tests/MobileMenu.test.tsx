@@ -1,11 +1,11 @@
-import ExcalidrawApp from "../../excalidraw-app";
+import ExcalidrawApp from "../App";
 import {
   mockBoundingClientRect,
   render,
   restoreOriginalGetBoundingClientRect,
-} from "../../src/tests/test-utils";
+} from "../../packages/excalidraw/tests/test-utils";
 
-import { UI } from "../../src/tests/helpers/ui";
+import { UI } from "../../packages/excalidraw/tests/helpers/ui";
 
 describe("Test MobileMenu", () => {
   const { h } = window;
@@ -28,13 +28,12 @@ describe("Test MobileMenu", () => {
         collabServerUrl="https://test.com"
         roomLinkData={null}
         username={""}
-        firebaseToken=""
         theme="dark"
         excalidrawAPIRefCallback={() => {}}
+        firebaseToken=""
         onCollabRoomSave={() => Promise.resolve()}
       />,
-    );
-    // @ts-ignore
+    ); // @ts-ignore
     h.app.refreshViewportBreakpoints();
     // @ts-ignore
     h.app.refreshEditorBreakpoints();

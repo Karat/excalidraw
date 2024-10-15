@@ -1,11 +1,12 @@
 import React from "react";
-import { useI18n } from "../../src/i18n";
-import { WelcomeScreen } from "../../src/packages/excalidraw/index";
+import { loginIcon } from "../../packages/excalidraw/components/icons";
+import { useI18n } from "../../packages/excalidraw/i18n";
+import { WelcomeScreen } from "../../packages/excalidraw/index";
 import { isExcalidrawPlusSignedUser } from "../app_constants";
-import { POINTER_EVENTS } from "../../src/constants";
+import { POINTER_EVENTS } from "../../packages/excalidraw/constants";
 
 export const AppWelcomeScreen: React.FC<{
-  setCollabDialogShown: (toggle: boolean) => any;
+  onCollabDialogOpen: () => any;
   isCollabEnabled: boolean;
 }> = React.memo((props) => {
   const { t } = useI18n();
@@ -51,7 +52,7 @@ export const AppWelcomeScreen: React.FC<{
           <WelcomeScreen.Center.MenuItemHelp />
           {/* {props.isCollabEnabled && (
             <WelcomeScreen.Center.MenuItemLiveCollaborationTrigger
-              onSelect={() => props.setCollabDialogShown(true)}
+              onSelect={() => props.onCollabDialogOpen()}
             />
           )} */}
           {/* {!isExcalidrawPlusSignedUser && (
@@ -60,9 +61,9 @@ export const AppWelcomeScreen: React.FC<{
                 import.meta.env.VITE_APP_PLUS_LP
               }/plus?utm_source=excalidraw&utm_medium=app&utm_content=welcomeScreenGuest`}
               shortcut={null}
-              icon={PlusPromoIcon}
+              icon={loginIcon}
             >
-              Try Excalidraw Plus!
+              Sign up
             </WelcomeScreen.Center.MenuItemLink>
           )} */}
         </WelcomeScreen.Center.Menu>

@@ -1,30 +1,34 @@
-import { defaultLang } from "../../src/i18n";
-import { UI } from "../../src/tests/helpers/ui";
-import { screen, fireEvent, waitFor, render } from "../../src/tests/test-utils";
+import { defaultLang } from "../../packages/excalidraw/i18n";
+import { UI } from "../../packages/excalidraw/tests/helpers/ui";
+import {
+  screen,
+  fireEvent,
+  waitFor,
+  render,
+} from "../../packages/excalidraw/tests/test-utils";
 
-import ExcalidrawApp from "../../excalidraw-app";
+import ExcalidrawApp from "../App";
 
 describe("Test LanguageList", () => {
   it("rerenders UI on language change", async () => {
-    await render(
-      <ExcalidrawApp
-        firebaseConfig={{
-          apiKey: "",
-          authDomain: "",
-          databaseURL: "",
-          projectId: "",
-          storageBucket: "",
-        }}
-        collabServerUrl="https://test.com"
-        roomLinkData={null}
-        username={""}
-        firebaseToken=""
-        theme="dark"
-        excalidrawAPIRefCallback={() => {}}
-        onCollabRoomSave={() => Promise.resolve()}
-      />,
-    );
-
+      await render(
+        <ExcalidrawApp
+          firebaseConfig={{
+            apiKey: "",
+            authDomain: "",
+            databaseURL: "",
+            projectId: "",
+            storageBucket: "",
+          }}
+          collabServerUrl="https://test.com"
+          roomLinkData={null}
+          username={""}
+          theme="dark"
+          excalidrawAPIRefCallback={() => {}}
+          firebaseToken=""
+          onCollabRoomSave={() => Promise.resolve()}
+        />,
+      );
     // select rectangle tool to show properties menu
     UI.clickTool("rectangle");
     // english lang should display `thin` label
