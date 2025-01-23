@@ -46,6 +46,16 @@ export type SVGRenderConfig = {
   frameRendering: AppState["frameRendering"];
   canvasBackgroundColor: AppState["viewBackgroundColor"];
   embedsValidationStatus: EmbedsValidationStatus;
+<<<<<<< HEAD
+=======
+  /**
+   * whether to attempt to reuse images as much as possible through symbols
+   * (reduces SVG size, but may be incompoatible with some SVG renderers)
+   *
+   * @default true
+   */
+  reuseImages: boolean;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };
 
 export type InteractiveCanvasRenderConfig = {

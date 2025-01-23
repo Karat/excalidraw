@@ -16,7 +16,11 @@ import { vectorFromPoint, vectorScale } from "./vector";
  * @param y The Y coordinate
  * @returns The branded and created point
  */
+<<<<<<< HEAD
 export function point<Point extends GlobalPoint | LocalPoint>(
+=======
+export function pointFrom<Point extends GlobalPoint | LocalPoint>(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   x: number,
   y: number,
 ): Point {
@@ -33,7 +37,11 @@ export function pointFromArray<Point extends GlobalPoint | LocalPoint>(
   numberArray: number[],
 ): Point | undefined {
   return numberArray.length === 2
+<<<<<<< HEAD
     ? point<Point>(numberArray[0], numberArray[1])
+=======
+    ? pointFrom<Point>(numberArray[0], numberArray[1])
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     : undefined;
 }
 
@@ -107,7 +115,11 @@ export function pointRotateRads<Point extends GlobalPoint | LocalPoint>(
   [cx, cy]: Point,
   angle: Radians,
 ): Point {
+<<<<<<< HEAD
   return point(
+=======
+  return pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     (x - cx) * Math.cos(angle) - (y - cy) * Math.sin(angle) + cx,
     (x - cx) * Math.sin(angle) + (y - cy) * Math.cos(angle) + cy,
   );
@@ -146,7 +158,11 @@ export function pointTranslate<
   From extends GlobalPoint | LocalPoint,
   To extends GlobalPoint | LocalPoint,
 >(p: From, v: Vector = [0, 0] as Vector): To {
+<<<<<<< HEAD
   return point(p[0] + v[0], p[1] + v[1]);
+=======
+  return pointFrom(p[0] + v[0], p[1] + v[1]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 }
 
 /**
@@ -157,7 +173,11 @@ export function pointTranslate<
  * @returns The middle point
  */
 export function pointCenter<P extends LocalPoint | GlobalPoint>(a: P, b: P): P {
+<<<<<<< HEAD
   return point((a[0] + b[0]) / 2, (a[1] + b[1]) / 2);
+=======
+  return pointFrom((a[0] + b[0]) / 2, (a[1] + b[1]) / 2);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 }
 
 /**
@@ -172,7 +192,11 @@ export function pointAdd<Point extends LocalPoint | GlobalPoint>(
   a: Point,
   b: Point,
 ): Point {
+<<<<<<< HEAD
   return point(a[0] + b[0], a[1] + b[1]);
+=======
+  return pointFrom(a[0] + b[0], a[1] + b[1]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 }
 
 /**
@@ -187,7 +211,11 @@ export function pointSubtract<Point extends LocalPoint | GlobalPoint>(
   a: Point,
   b: Point,
 ): Point {
+<<<<<<< HEAD
   return point(a[0] - b[0], a[1] - b[1]);
+=======
+  return pointFrom(a[0] - b[0], a[1] - b[1]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 }
 
 /**

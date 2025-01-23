@@ -34,12 +34,19 @@ import {
 import { newTextElement } from "../element";
 import { type Mutable } from "../utility-types";
 import { newElementWith } from "../element/mutateElement";
+<<<<<<< HEAD
 import { isFrameLikeElement, isTextElement } from "../element/typeChecks";
+=======
+import { isFrameLikeElement } from "../element/typeChecks";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import type { RenderableElementsMap } from "./types";
 import { syncInvalidIndices } from "../fractionalIndex";
 import { renderStaticScene } from "../renderer/staticScene";
 import { Fonts } from "../fonts";
+<<<<<<< HEAD
 import type { Font } from "../fonts/ExcalidrawFont";
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const SVG_EXPORT_TAG = `<!-- svg-source:excalidraw -->`;
 
@@ -175,7 +182,11 @@ export const exportToCanvas = async (
     return { canvas, scale: appState.exportScale };
   },
   loadFonts: () => Promise<void> = async () => {
+<<<<<<< HEAD
     await Fonts.loadFontsForElements(elements);
+=======
+    await Fonts.loadElementsFonts(elements);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   },
 ) => {
   // load font faces before continuing, by default leverages browsers' [FontFace API](https://developer.mozilla.org/en-US/docs/Web/API/FontFace)
@@ -274,6 +285,10 @@ export const exportToSvg = async (
     renderEmbeddables?: boolean;
     exportingFrame?: ExcalidrawFrameLikeElement | null;
     skipInliningFonts?: true;
+<<<<<<< HEAD
+=======
+    reuseImages?: boolean;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   },
 ): Promise<SVGSVGElement> => {
   const frameRendering = getFrameRenderingConfig(
@@ -308,9 +323,13 @@ export const exportToSvg = async (
   // the tempScene hack which duplicates and regenerates ids
   if (exportEmbedScene) {
     try {
+<<<<<<< HEAD
       metadata = await (
         await import("../data/image")
       ).encodeSvgMetadata({
+=======
+      metadata = (await import("../data/image")).encodeSvgMetadata({
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         // when embedding scene, we want to embed the origionally supplied
         // elements which don't contain the temp frame labels.
         // But it also requires that the exportToSvg is being supplied with
@@ -366,14 +385,26 @@ export const exportToSvg = async (
         </clipPath>`;
   }
 
+<<<<<<< HEAD
   const fontFaces = opts?.skipInliningFonts ? [] : await getFontFaces(elements);
+=======
+  const fontFaces = !opts?.skipInliningFonts
+    ? await Fonts.generateFontFaceDeclarations(elements)
+    : [];
+
+  const delimiter = "\n      "; // 6 spaces
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   svgRoot.innerHTML = `
   ${SVG_EXPORT_TAG}
   ${metadata}
   <defs>
+<<<<<<< HEAD
     <style class="style-fonts">
       ${fontFaces.join("\n")}
+=======
+    <style class="style-fonts">${delimiter}${fontFaces.join(delimiter)}
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     </style>
     ${exportingFrameClipPath}
   </defs>
@@ -415,6 +446,10 @@ export const exportToSvg = async (
               .map((element) => [element.id, true]),
           )
         : new Map(),
+<<<<<<< HEAD
+=======
+      reuseImages: opts?.reuseImages ?? true,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     },
   );
 

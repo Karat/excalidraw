@@ -69,6 +69,7 @@ vi.mock("socket.io-client", () => {
  */
 describe("collaboration", () => {
   it("should allow to undo / redo even on force-deleted elements", async () => {
+<<<<<<< HEAD
     await render(
       <ExcalidrawApp
         firebaseConfig={{
@@ -87,6 +88,9 @@ describe("collaboration", () => {
         onCollabRoomSave={() => Promise.resolve()}
       />,
     );
+=======
+    await render(<ExcalidrawApp />);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     const rect1Props = {
       type: "rectangle",
       id: "A",

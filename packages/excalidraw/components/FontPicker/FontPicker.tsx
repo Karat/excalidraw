@@ -21,7 +21,11 @@ export const DEFAULT_FONTS = [
     value: FONT_FAMILY.Excalifont,
     icon: FreedrawIcon,
     text: t("labels.handDrawn"),
+<<<<<<< HEAD
     testId: "font-family-handrawn",
+=======
+    testId: "font-family-hand-drawn",
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   },
   {
     value: FONT_FAMILY.Nunito,

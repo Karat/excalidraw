@@ -29,6 +29,12 @@ interface ImportMetaEnv {
   // Enable eslint in dev server
   VITE_APP_ENABLE_ESLINT: string;
 
+<<<<<<< HEAD
+=======
+  // Enable PWA in dev server
+  VITE_APP_ENABLE_PWA: string;
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   VITE_APP_PLUS_LP: string;
 
   VITE_APP_PLUS_APP: string;

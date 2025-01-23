@@ -6,7 +6,11 @@ import type {
   Radians,
 } from "../../math";
 import {
+<<<<<<< HEAD
   point,
+=======
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   pointRotateRads,
   pointScaleFromOrigin,
   radiansToDegrees,
@@ -82,7 +86,11 @@ export const headingForPointFromElement = <
 
     const top = pointRotateRads(
       pointScaleFromOrigin(
+<<<<<<< HEAD
         point(element.x + element.width / 2, element.y),
+=======
+        pointFrom(element.x + element.width / 2, element.y),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         midPoint,
         SEARCH_CONE_MULTIPLIER,
       ),
@@ -91,7 +99,11 @@ export const headingForPointFromElement = <
     );
     const right = pointRotateRads(
       pointScaleFromOrigin(
+<<<<<<< HEAD
         point(element.x + element.width, element.y + element.height / 2),
+=======
+        pointFrom(element.x + element.width, element.y + element.height / 2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         midPoint,
         SEARCH_CONE_MULTIPLIER,
       ),
@@ -100,7 +112,11 @@ export const headingForPointFromElement = <
     );
     const bottom = pointRotateRads(
       pointScaleFromOrigin(
+<<<<<<< HEAD
         point(element.x + element.width / 2, element.y + element.height),
+=======
+        pointFrom(element.x + element.width / 2, element.y + element.height),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         midPoint,
         SEARCH_CONE_MULTIPLIER,
       ),
@@ -109,7 +125,11 @@ export const headingForPointFromElement = <
     );
     const left = pointRotateRads(
       pointScaleFromOrigin(
+<<<<<<< HEAD
         point(element.x, element.y + element.height / 2),
+=======
+        pointFrom(element.x, element.y + element.height / 2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         midPoint,
         SEARCH_CONE_MULTIPLIER,
       ),
@@ -133,22 +153,38 @@ export const headingForPointFromElement = <
   }
 
   const topLeft = pointScaleFromOrigin(
+<<<<<<< HEAD
     point(aabb[0], aabb[1]),
+=======
+    pointFrom(aabb[0], aabb[1]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     midPoint,
     SEARCH_CONE_MULTIPLIER,
   ) as Point;
   const topRight = pointScaleFromOrigin(
+<<<<<<< HEAD
     point(aabb[2], aabb[1]),
+=======
+    pointFrom(aabb[2], aabb[1]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     midPoint,
     SEARCH_CONE_MULTIPLIER,
   ) as Point;
   const bottomLeft = pointScaleFromOrigin(
+<<<<<<< HEAD
     point(aabb[0], aabb[3]),
+=======
+    pointFrom(aabb[0], aabb[3]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     midPoint,
     SEARCH_CONE_MULTIPLIER,
   ) as Point;
   const bottomRight = pointScaleFromOrigin(
+<<<<<<< HEAD
     point(aabb[2], aabb[3]),
+=======
+    pointFrom(aabb[2], aabb[3]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     midPoint,
     SEARCH_CONE_MULTIPLIER,
   ) as Point;

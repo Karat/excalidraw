@@ -16,6 +16,10 @@ import {
   isArrowElement,
   isElbowArrow,
   isFrameLikeElement,
+<<<<<<< HEAD
+=======
+  isImageElement,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   isTextElement,
 } from "./typeChecks";
 import { getFontString } from "../utils";
@@ -251,6 +255,17 @@ export const dragNewElement = ({
   }
 
   if (width !== 0 && height !== 0) {
+<<<<<<< HEAD
+=======
+    let imageInitialDimension = null;
+    if (isImageElement(newElement)) {
+      imageInitialDimension = {
+        initialWidth: width,
+        initialHeight: height,
+      };
+    }
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     mutateElement(
       newElement,
       {
@@ -259,6 +274,10 @@ export const dragNewElement = ({
         width,
         height,
         ...textAutoResize,
+<<<<<<< HEAD
+=======
+        ...imageInitialDimension,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       },
       informMutation,
     );

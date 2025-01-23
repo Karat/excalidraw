@@ -1,5 +1,9 @@
 import polyfill from "../packages/excalidraw/polyfill";
+<<<<<<< HEAD
 import { memo, useCallback, useEffect, useRef, useState } from "react";
+=======
+import { useCallback, useEffect, useRef, useState } from "react";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { trackEvent } from "../packages/excalidraw/analytics";
 import { getDefaultAppState } from "../packages/excalidraw/appState";
 import { ErrorDialog } from "../packages/excalidraw/components/ErrorDialog";
@@ -8,15 +12,25 @@ import {
   APP_NAME,
   EVENT,
   THEME,
+<<<<<<< HEAD
+=======
+  TITLE_TIMEOUT,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   VERSION_TIMEOUT,
 } from "../packages/excalidraw/constants";
 import { loadFromBlob } from "../packages/excalidraw/data/blob";
 import type {
+<<<<<<< HEAD
   ExcalidrawElement,
   FileId,
   NonDeletedExcalidrawElement,
   OrderedExcalidrawElement,
   Theme,
+=======
+  FileId,
+  NonDeletedExcalidrawElement,
+  OrderedExcalidrawElement,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 } from "../packages/excalidraw/element/types";
 import { useCallbackRefState } from "../packages/excalidraw/hooks/useCallbackRefState";
 import { t } from "../packages/excalidraw/i18n";
@@ -58,10 +72,17 @@ import Collab, {
 } from "./collab/Collab";
 import {
   exportToBackend,
+<<<<<<< HEAD
   isCollaborationLink,
   loadScene,
 } from "./data";
 import type { SyncableExcalidrawElement } from "./data";
+=======
+  getCollaborationLinkData,
+  isCollaborationLink,
+  loadScene,
+} from "./data";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import {
   importFromLocalStorage,
   importUsernameFromLocalStorage,
@@ -127,7 +148,11 @@ import DebugCanvas, {
   loadSavedDebugState,
 } from "./components/DebugCanvas";
 import { AIComponents } from "./components/AI";
+<<<<<<< HEAD
 import React from "react";
+=======
+import { ExcalidrawPlusIframeExport } from "./ExcalidrawPlusIframeExport";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 polyfill();
 
@@ -214,7 +239,11 @@ const initializeScene = async (opts: {
     scrollToContent?: boolean;
   } = await loadScene(null, null, localDataState);
 
+<<<<<<< HEAD
   let roomLinkData = customRoomLinkData
+=======
+  let roomLinkData = getCollaborationLinkData(window.location.href);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   const isExternalScene = !!(id || jsonBackendMatch || roomLinkData);
   if (isExternalScene) {
     if (
@@ -280,7 +309,10 @@ const initializeScene = async (opts: {
 
   if (roomLinkData && opts.collabAPI) {
     const { excalidrawAPI } = opts;
+<<<<<<< HEAD
     opts.collabAPI.setUsername(customUsername);
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
     const scene = await opts.collabAPI.startCollaboration(roomLinkData);
 
@@ -327,7 +359,11 @@ const initializeScene = async (opts: {
 
 const ExcalidrawWrapper = () => {
   const [errorMessage, setErrorMessage] = useState("");
+<<<<<<< HEAD
   const isCollabDisabled = false;
+=======
+  const isCollabDisabled = isRunningInIframe();
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   const [appTheme, setAppTheme] = useAtom(appThemeAtom);
   const { editorTheme } = useHandleAppTheme();
@@ -358,11 +394,14 @@ const ExcalidrawWrapper = () => {
   const [excalidrawAPI, excalidrawRefCallback] =
     useCallbackRefState<ExcalidrawImperativeAPI>();
 
+<<<<<<< HEAD
   const setExcalidrawAPI: SetExcalidrawAPI = (api: ExcalidrawImperativeAPI) => {
     excalidrawRefCallback(api);
     externalExcalidrawRefCallback(api);
   };
 
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   const [, setShareDialogState] = useAtom(shareDialogStateAtom);
   const [collabAPI] = useAtom(collabAPIAtom);
   const [isCollaborating] = useAtomWithInitialValue(isCollaboratingAtom, () => {
@@ -496,6 +535,14 @@ const ExcalidrawWrapper = () => {
       }
     };
 
+<<<<<<< HEAD
+=======
+    const titleTimeout = setTimeout(
+      () => (document.title = APP_NAME),
+      TITLE_TIMEOUT,
+    );
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     const syncData = debounce(() => {
       if (isTestEnv()) {
         return;
@@ -586,6 +633,10 @@ const ExcalidrawWrapper = () => {
         visibilityChange,
         false,
       );
+<<<<<<< HEAD
+=======
+      clearTimeout(titleTimeout);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     };
   }, [isCollabDisabled, collabAPI, excalidrawAPI, setLangCode]);
 
@@ -790,7 +841,11 @@ const ExcalidrawWrapper = () => {
       })}
     >
       <Excalidraw
+<<<<<<< HEAD
         excalidrawAPI={setExcalidrawAPI}
+=======
+        excalidrawAPI={excalidrawRefCallback}
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         onChange={onChange}
         initialData={initialStatePromiseRef.current.promise}
         isCollaborating={isCollaborating}
@@ -798,6 +853,36 @@ const ExcalidrawWrapper = () => {
         UIOptions={{
           canvasActions: {
             toggleTheme: true,
+<<<<<<< HEAD
+=======
+            export: {
+              onExportToBackend,
+              renderCustomUI: excalidrawAPI
+                ? (elements, appState, files) => {
+                    return (
+                      <ExportToExcalidrawPlus
+                        elements={elements}
+                        appState={appState}
+                        files={files}
+                        name={excalidrawAPI.getName()}
+                        onError={(error) => {
+                          excalidrawAPI?.updateScene({
+                            appState: {
+                              errorMessage: error.message,
+                            },
+                          });
+                        }}
+                        onSuccess={() => {
+                          excalidrawAPI.updateScene({
+                            appState: { openDialog: null },
+                          });
+                        }}
+                      />
+                    );
+                  }
+                : undefined,
+            },
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           },
         }}
         langCode={langCode}
@@ -1099,6 +1184,7 @@ const ExcalidrawWrapper = () => {
   );
 };
 
+<<<<<<< HEAD
 type FirebaseConfig = {
   apiKey: string;
   authDomain: string;
@@ -1143,6 +1229,15 @@ const ExcalidrawApp: React.FC<{
   externalExcalidrawRefCallback = props.excalidrawAPIRefCallback;
   customFirebaseToken= props.firebaseToken;
   onCollabRoomSave = props.onCollabRoomSave;
+=======
+const ExcalidrawApp = () => {
+  const isCloudExportWindow =
+    window.location.pathname === "/excalidraw-plus-export";
+  if (isCloudExportWindow) {
+    return <ExcalidrawPlusIframeExport />;
+  }
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   return (
     <TopErrorBoundary>
       <Provider unstable_createStore={() => appJotaiStore}>
@@ -1150,6 +1245,7 @@ const ExcalidrawApp: React.FC<{
       </Provider>
     </TopErrorBoundary>
   );
+<<<<<<< HEAD
 });
 
 export {
@@ -1159,4 +1255,8 @@ export {
   onCollabRoomSave,
   ExcalidrawApp
 };
+=======
+};
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 export default ExcalidrawApp;

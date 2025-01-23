@@ -26,6 +26,10 @@ import { trackEvent } from "../analytics";
 import {
   hasBoundTextElement,
   isElbowArrow,
+<<<<<<< HEAD
+=======
+  isImageElement,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   isLinearElement,
   isTextElement,
 } from "../element/typeChecks";
@@ -126,6 +130,14 @@ export const SelectedShapeActions = ({
     targetElements.length === 1 &&
     isLinearElement(targetElements[0]) &&
     !isElbowArrow(targetElements[0]);
+<<<<<<< HEAD
+=======
+
+  const showCropEditorAction =
+    !appState.croppingElementId &&
+    targetElements.length === 1 &&
+    isImageElement(targetElements[0]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   return (
     <div className="panelColumn">
@@ -245,6 +257,10 @@ export const SelectedShapeActions = ({
             {renderAction("group")}
             {renderAction("ungroup")}
             {showLinkIcon && renderAction("hyperlink")}
+<<<<<<< HEAD
+=======
+            {showCropEditorAction && renderAction("cropEditor")}
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             {showLineEditorAction && renderAction("toggleLinearEditor")}
           </div>
         </fieldset>
@@ -340,7 +356,11 @@ export const ShapesSwitcher = ({
           title={t("toolBar.extraTools")}
         >
           {extraToolsIcon}
+<<<<<<< HEAD
           {/* {app.props.aiEnabled !== false && (
+=======
+          {app.props.aiEnabled !== false && (
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             <div
               style={{
                 display: "inline-flex",
@@ -358,7 +378,11 @@ export const ShapesSwitcher = ({
             >
               AI
             </div>
+<<<<<<< HEAD
           )} */}
+=======
+          )}
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         </DropdownMenu.Trigger>
         <DropdownMenu.Content
           onClickOutside={() => setIsExtraToolsMenuOpen(false)}

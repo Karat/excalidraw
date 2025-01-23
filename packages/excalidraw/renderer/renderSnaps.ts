@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { point, type GlobalPoint, type LocalPoint } from "../../math";
+=======
+import { pointFrom, type GlobalPoint, type LocalPoint } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { THEME } from "../constants";
 import type { PointSnapLine, PointerSnapLine } from "../snapping";
 import type { InteractiveCanvasAppState } from "../types";
@@ -140,14 +144,20 @@ const drawGapLine = <Point extends LocalPoint | GlobalPoint>(
     // (1)
     if (!appState.zenModeEnabled) {
       drawLine(
+<<<<<<< HEAD
         point(from[0], from[1] - FULL),
         point(from[0], from[1] + FULL),
+=======
+        pointFrom(from[0], from[1] - FULL),
+        pointFrom(from[0], from[1] + FULL),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         context,
       );
     }
 
     // (3)
     drawLine(
+<<<<<<< HEAD
       point(halfPoint[0] - QUARTER, halfPoint[1] - HALF),
       point(halfPoint[0] - QUARTER, halfPoint[1] + HALF),
       context,
@@ -155,12 +165,29 @@ const drawGapLine = <Point extends LocalPoint | GlobalPoint>(
     drawLine(
       point(halfPoint[0] + QUARTER, halfPoint[1] - HALF),
       point(halfPoint[0] + QUARTER, halfPoint[1] + HALF),
+=======
+      pointFrom(halfPoint[0] - QUARTER, halfPoint[1] - HALF),
+      pointFrom(halfPoint[0] - QUARTER, halfPoint[1] + HALF),
+      context,
+    );
+    drawLine(
+      pointFrom(halfPoint[0] + QUARTER, halfPoint[1] - HALF),
+      pointFrom(halfPoint[0] + QUARTER, halfPoint[1] + HALF),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       context,
     );
 
     if (!appState.zenModeEnabled) {
       // (4)
+<<<<<<< HEAD
       drawLine(point(to[0], to[1] - FULL), point(to[0], to[1] + FULL), context);
+=======
+      drawLine(
+        pointFrom(to[0], to[1] - FULL),
+        pointFrom(to[0], to[1] + FULL),
+        context,
+      );
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
       // (2)
       drawLine(from, to, context);
@@ -170,14 +197,20 @@ const drawGapLine = <Point extends LocalPoint | GlobalPoint>(
     // (1)
     if (!appState.zenModeEnabled) {
       drawLine(
+<<<<<<< HEAD
         point(from[0] - FULL, from[1]),
         point(from[0] + FULL, from[1]),
+=======
+        pointFrom(from[0] - FULL, from[1]),
+        pointFrom(from[0] + FULL, from[1]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         context,
       );
     }
 
     // (3)
     drawLine(
+<<<<<<< HEAD
       point(halfPoint[0] - HALF, halfPoint[1] - QUARTER),
       point(halfPoint[0] + HALF, halfPoint[1] - QUARTER),
       context,
@@ -185,12 +218,29 @@ const drawGapLine = <Point extends LocalPoint | GlobalPoint>(
     drawLine(
       point(halfPoint[0] - HALF, halfPoint[1] + QUARTER),
       point(halfPoint[0] + HALF, halfPoint[1] + QUARTER),
+=======
+      pointFrom(halfPoint[0] - HALF, halfPoint[1] - QUARTER),
+      pointFrom(halfPoint[0] + HALF, halfPoint[1] - QUARTER),
+      context,
+    );
+    drawLine(
+      pointFrom(halfPoint[0] - HALF, halfPoint[1] + QUARTER),
+      pointFrom(halfPoint[0] + HALF, halfPoint[1] + QUARTER),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       context,
     );
 
     if (!appState.zenModeEnabled) {
       // (4)
+<<<<<<< HEAD
       drawLine(point(to[0] - FULL, to[1]), point(to[0] + FULL, to[1]), context);
+=======
+      drawLine(
+        pointFrom(to[0] - FULL, to[1]),
+        pointFrom(to[0] + FULL, to[1]),
+        context,
+      );
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
       // (2)
       drawLine(from, to, context);

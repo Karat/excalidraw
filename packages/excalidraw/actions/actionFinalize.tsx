@@ -15,7 +15,11 @@ import { isBindingElement, isLinearElement } from "../element/typeChecks";
 import type { AppState } from "../types";
 import { resetCursor } from "../cursor";
 import { StoreAction } from "../store";
+<<<<<<< HEAD
 import { point } from "../../math";
+=======
+import { pointFrom } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { isPathALoop } from "../shapes";
 
 export const actionFinalize = register({
@@ -115,7 +119,11 @@ export const actionFinalize = register({
           mutateElement(multiPointElement, {
             points: linePoints.map((p, index) =>
               index === linePoints.length - 1
+<<<<<<< HEAD
                 ? point(firstPoint[0], firstPoint[1])
+=======
+                ? pointFrom(firstPoint[0], firstPoint[1])
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
                 : p,
             ),
           });

@@ -106,6 +106,11 @@ export type BinaryFileData = {
    * Epoch timestamp in milliseconds.
    */
   lastRetrieved?: number;
+  /**
+   * indicates the version of the file. This can be used to determine whether
+   * the file dataURL has changed e.g. as part of restore due to schema update.
+   */
+  version?: number;
 };
 
 export type BinaryFileMetadata = Omit<BinaryFileData, "dataURL">;
@@ -176,6 +181,11 @@ export type StaticCanvasAppState = Readonly<
     gridStep: AppState["gridStep"];
     frameRendering: AppState["frameRendering"];
     currentHoveredFontFamily: AppState["currentHoveredFontFamily"];
+<<<<<<< HEAD
+=======
+    // Cropping
+    croppingElementId: AppState["croppingElementId"];
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   }
 >;
 
@@ -198,6 +208,12 @@ export type InteractiveCanvasAppState = Readonly<
     snapLines: AppState["snapLines"];
     zenModeEnabled: AppState["zenModeEnabled"];
     editingTextElement: AppState["editingTextElement"];
+<<<<<<< HEAD
+=======
+    // Cropping
+    isCropping: AppState["isCropping"];
+    croppingElementId: AppState["croppingElementId"];
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     // Search matches
     searchMatches: AppState["searchMatches"];
   }
@@ -219,6 +235,10 @@ export type ObservedElementsAppState = {
   editingLinearElementId: LinearElementEditor["elementId"] | null;
   // Right now it's coupled to `editingLinearElement`, ideally it should not be really needed as we already have selectedElementIds & editingLinearElementId
   selectedLinearElementId: LinearElementEditor["elementId"] | null;
+<<<<<<< HEAD
+=======
+  croppingElementId: AppState["croppingElementId"];
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };
 
 export interface AppState {
@@ -386,6 +406,14 @@ export interface AppState {
   userToFollow: UserToFollow | null;
   /** the socket ids of the users following the current user */
   followedBy: Set<SocketId>;
+<<<<<<< HEAD
+=======
+
+  /** image cropping */
+  isCropping: boolean;
+  croppingElementId: ExcalidrawElement["id"] | null;
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   searchMatches: readonly SearchMatch[];
 }
 

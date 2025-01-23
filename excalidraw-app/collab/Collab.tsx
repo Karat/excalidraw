@@ -1,6 +1,10 @@
 import throttle from "lodash.throttle";
 import { PureComponent } from "react";
 import type {
+<<<<<<< HEAD
+=======
+  BinaryFileData,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   ExcalidrawImperativeAPI,
   SocketId,
 } from "../../packages/excalidraw/types";
@@ -9,6 +13,7 @@ import { APP_NAME, ENV, EVENT } from "../../packages/excalidraw/constants";
 import type { ImportedDataState } from "../../packages/excalidraw/data/types";
 import type {
   ExcalidrawElement,
+  FileId,
   InitializedExcalidrawImageElement,
   OrderedExcalidrawElement,
 } from "../../packages/excalidraw/element/types";
@@ -43,7 +48,6 @@ import type {
 import {
   generateCollaborationLinkData,
   getCollaborationLink,
-  getCollabServer,
   getSyncableElements,
 } from "../data";
 import {
@@ -88,8 +92,11 @@ import type {
   ReconciledExcalidrawElement,
   RemoteExcalidrawElement,
 } from "../../packages/excalidraw/data/reconcile";
+<<<<<<< HEAD
 import { customCollabServerUrl, onCollabRoomSave } from "../App";
 
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 export const collabAPIAtom = atom<CollabAPI | null>(null);
 export const isCollaboratingAtom = atom(false);
@@ -160,7 +167,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
           throw new AbortError();
         }
 
-        return saveFilesToFirebase({
+        const { savedFiles, erroredFiles } = await saveFilesToFirebase({
           prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
           files: await encodeFilesForUpload({
             files: addedFiles,
@@ -168,6 +175,29 @@ class Collab extends PureComponent<CollabProps, CollabState> {
             maxBytes: FILE_UPLOAD_MAX_BYTES,
           }),
         });
+
+        return {
+          savedFiles: savedFiles.reduce(
+            (acc: Map<FileId, BinaryFileData>, id) => {
+              const fileData = addedFiles.get(id);
+              if (fileData) {
+                acc.set(id, fileData);
+              }
+              return acc;
+            },
+            new Map(),
+          ),
+          erroredFiles: erroredFiles.reduce(
+            (acc: Map<FileId, BinaryFileData>, id) => {
+              const fileData = addedFiles.get(id);
+              if (fileData) {
+                acc.set(id, fileData);
+              }
+              return acc;
+            },
+            new Map(),
+          ),
+        };
       },
     });
     this.excalidrawAPI = props.excalidrawAPI;
@@ -398,7 +428,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       .filter((element) => {
         return (
           isInitializedImageElement(element) &&
-          !this.fileManager.isFileHandled(element.fileId) &&
+          !this.fileManager.isFileTracked(element.fileId) &&
           !element.isDeleted &&
           (opts.forceFetchFiles
             ? element.status !== "pending" ||
@@ -486,12 +516,13 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     this.fallbackInitializationHandler = fallbackInitializationHandler;
 
     try {
+<<<<<<< HEAD
       const socketServerData = await getCollabServer(customCollabServerUrl);
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       this.portal.socket = this.portal.open(
-        socketIOClient(socketServerData.url, {
-          transports: socketServerData.polling
-            ? ["websocket", "polling"]
-            : ["websocket"],
+        socketIOClient(import.meta.env.VITE_APP_WS_SERVER_URL, {
+          transports: ["websocket", "polling"],
         }),
         roomId,
         roomKey,

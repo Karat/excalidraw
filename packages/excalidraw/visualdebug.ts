@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 import { isLineSegment, lineSegment, point, type GlobalPoint } from "../math";
+=======
+import {
+  isLineSegment,
+  lineSegment,
+  pointFrom,
+  type GlobalPoint,
+} from "../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import type { LineSegment } from "../utils";
 import type { BoundingBox, Bounds } from "./element/bounds";
 import { isBounds } from "./element/typeChecks";
@@ -52,8 +61,13 @@ export const debugDrawPoint = (
 
   debugDrawLine(
     lineSegment(
+<<<<<<< HEAD
       point<GlobalPoint>(p[0] + xOffset - 10, p[1] + yOffset - 10),
       point<GlobalPoint>(p[0] + xOffset + 10, p[1] + yOffset + 10),
+=======
+      pointFrom<GlobalPoint>(p[0] + xOffset - 10, p[1] + yOffset - 10),
+      pointFrom<GlobalPoint>(p[0] + xOffset + 10, p[1] + yOffset + 10),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     ),
     {
       color: opts?.color ?? "cyan",
@@ -62,8 +76,13 @@ export const debugDrawPoint = (
   );
   debugDrawLine(
     lineSegment(
+<<<<<<< HEAD
       point<GlobalPoint>(p[0] + xOffset - 10, p[1] + yOffset + 10),
       point<GlobalPoint>(p[0] + xOffset + 10, p[1] + yOffset - 10),
+=======
+      pointFrom<GlobalPoint>(p[0] + xOffset - 10, p[1] + yOffset + 10),
+      pointFrom<GlobalPoint>(p[0] + xOffset + 10, p[1] + yOffset - 10),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     ),
     {
       color: opts?.color ?? "cyan",
@@ -83,6 +102,7 @@ export const debugDrawBoundingBox = (
     debugDrawLine(
       [
         lineSegment(
+<<<<<<< HEAD
           point<GlobalPoint>(bbox.minX, bbox.minY),
           point<GlobalPoint>(bbox.maxX, bbox.minY),
         ),
@@ -97,6 +117,22 @@ export const debugDrawBoundingBox = (
         lineSegment(
           point<GlobalPoint>(bbox.minX, bbox.maxY),
           point<GlobalPoint>(bbox.minX, bbox.minY),
+=======
+          pointFrom<GlobalPoint>(bbox.minX, bbox.minY),
+          pointFrom<GlobalPoint>(bbox.maxX, bbox.minY),
+        ),
+        lineSegment(
+          pointFrom<GlobalPoint>(bbox.maxX, bbox.minY),
+          pointFrom<GlobalPoint>(bbox.maxX, bbox.maxY),
+        ),
+        lineSegment(
+          pointFrom<GlobalPoint>(bbox.maxX, bbox.maxY),
+          pointFrom<GlobalPoint>(bbox.minX, bbox.maxY),
+        ),
+        lineSegment(
+          pointFrom<GlobalPoint>(bbox.minX, bbox.maxY),
+          pointFrom<GlobalPoint>(bbox.minX, bbox.minY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         ),
       ],
       {
@@ -118,6 +154,7 @@ export const debugDrawBounds = (
     debugDrawLine(
       [
         lineSegment(
+<<<<<<< HEAD
           point<GlobalPoint>(bbox[0], bbox[1]),
           point<GlobalPoint>(bbox[2], bbox[1]),
         ),
@@ -132,6 +169,22 @@ export const debugDrawBounds = (
         lineSegment(
           point<GlobalPoint>(bbox[0], bbox[3]),
           point<GlobalPoint>(bbox[0], bbox[1]),
+=======
+          pointFrom<GlobalPoint>(bbox[0], bbox[1]),
+          pointFrom<GlobalPoint>(bbox[2], bbox[1]),
+        ),
+        lineSegment(
+          pointFrom<GlobalPoint>(bbox[2], bbox[1]),
+          pointFrom<GlobalPoint>(bbox[2], bbox[3]),
+        ),
+        lineSegment(
+          pointFrom<GlobalPoint>(bbox[2], bbox[3]),
+          pointFrom<GlobalPoint>(bbox[0], bbox[3]),
+        ),
+        lineSegment(
+          pointFrom<GlobalPoint>(bbox[0], bbox[3]),
+          pointFrom<GlobalPoint>(bbox[0], bbox[1]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         ),
       ],
       {

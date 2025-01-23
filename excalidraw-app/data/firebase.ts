@@ -19,13 +19,20 @@ import {
   encryptData,
   decryptData,
 } from "../../packages/excalidraw/data/encryption";
+<<<<<<< HEAD
 import { ENV, MIME_TYPES } from "../../packages/excalidraw/constants";
+=======
+import { MIME_TYPES } from "../../packages/excalidraw/constants";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import type { SyncableExcalidrawElement } from ".";
 import { getSyncableElements } from ".";
 import type { ResolutionType } from "../../packages/excalidraw/utility-types";
 import type { Socket } from "socket.io-client";
 import type { RemoteExcalidrawElement } from "../../packages/excalidraw/data/reconcile";
+<<<<<<< HEAD
 import { customFirebaseConfig, customFirebaseToken} from "../App";
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 // private
 // -----------------------------------------------------------------------------
@@ -185,8 +192,8 @@ export const saveFilesToFirebase = async ({
 }) => {
   const firebase = await loadFirebaseStorage();
 
-  const erroredFiles = new Map<FileId, true>();
-  const savedFiles = new Map<FileId, true>();
+  const erroredFiles: FileId[] = [];
+  const savedFiles: FileId[] = [];
 
   await Promise.all(
     files.map(async ({ id, buffer }) => {
@@ -202,9 +209,9 @@ export const saveFilesToFirebase = async ({
               cacheControl: `public, max-age=${FILE_CACHE_MAX_AGE_SEC}`,
             },
           );
-        savedFiles.set(id, true);
+        savedFiles.push(id);
       } catch (error: any) {
-        erroredFiles.set(id, true);
+        erroredFiles.push(id);
       }
     }),
   );

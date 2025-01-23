@@ -21,6 +21,7 @@ import {
 } from "../constants";
 import type { MaybeTransformHandleType } from "./transformHandles";
 import { isTextElement } from ".";
+import { wrapText } from "./textWrapping";
 import { isBoundToContainer, isArrowElement } from "./typeChecks";
 import { LinearElementEditor } from "./linearElementEditor";
 import type { AppState } from "../types";
@@ -343,7 +344,11 @@ let canvas: HTMLCanvasElement | undefined;
  *
  * `Math.ceil` of the final width adds additional buffer which stabilizes slight wrapping incosistencies.
  */
+<<<<<<< HEAD
 const getLineWidth = (
+=======
+export const getLineWidth = (
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   text: string,
   font: FontString,
   forceAdvanceWidth?: true,
@@ -408,6 +413,7 @@ export const getTextHeight = (
   return getLineHeightInPx(fontSize, lineHeight) * lineCount;
 };
 
+<<<<<<< HEAD
 export const parseTokens = (text: string) => {
   // Splitting words containing "-" as those are treated as separate words
   // by css wrapping algorithm eg non-profit => non-, profit
@@ -573,28 +579,42 @@ export const wrapText = (
   return lines.join("\n");
 };
 
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 export const charWidth = (() => {
   const cachedCharWidth: { [key: FontString]: Array<number> } = {};
 
   const calculate = (char: string, font: FontString) => {
-    const ascii = char.charCodeAt(0);
+    const unicode = char.charCodeAt(0);
     if (!cachedCharWidth[font]) {
       cachedCharWidth[font] = [];
     }
+<<<<<<< HEAD
     if (!cachedCharWidth[font][ascii]) {
       const width = getLineWidth(char, font, true);
       cachedCharWidth[font][ascii] = width;
+=======
+    if (!cachedCharWidth[font][unicode]) {
+      const width = getLineWidth(char, font, true);
+      cachedCharWidth[font][unicode] = width;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     }
 
-    return cachedCharWidth[font][ascii];
+    return cachedCharWidth[font][unicode];
   };
 
   const getCache = (font: FontString) => {
     return cachedCharWidth[font];
   };
+
+  const clearCache = (font: FontString) => {
+    cachedCharWidth[font] = [];
+  };
+
   return {
     calculate,
     getCache,
+    clearCache,
   };
 })();
 

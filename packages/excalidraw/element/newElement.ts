@@ -34,9 +34,9 @@ import { getResizedElementAbsoluteCoords } from "./bounds";
 import {
   measureText,
   normalizeText,
-  wrapText,
   getBoundTextMaxWidth,
 } from "./textElement";
+import { wrapText } from "./textWrapping";
 import {
   DEFAULT_ELEMENT_PROPS,
   DEFAULT_FONT_FAMILY,
@@ -477,6 +477,7 @@ export const newImageElement = (
     status?: ExcalidrawImageElement["status"];
     fileId?: ExcalidrawImageElement["fileId"];
     scale?: ExcalidrawImageElement["scale"];
+    crop?: ExcalidrawImageElement["crop"];
   } & ElementConstructorOpts,
 ): NonDeleted<ExcalidrawImageElement> => {
   return {
@@ -487,6 +488,7 @@ export const newImageElement = (
     status: opts.status ?? "pending",
     fileId: opts.fileId ?? null,
     scale: opts.scale ?? [1, 1],
+    crop: opts.crop ?? null,
   };
 };
 
@@ -581,7 +583,10 @@ export const regenerateId = (
     if (
       window.h?.app
         ?.getSceneElementsIncludingDeleted()
+<<<<<<< HEAD
         // @ts-ignore
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         .find((el: ExcalidrawElement) => el.id === nextId)
     ) {
       nextId += "_copy";

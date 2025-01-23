@@ -15,6 +15,11 @@ Please add the latest change on the top under the correct section.
 
 ### Features
 
+<<<<<<< HEAD
+=======
+- Added hand-drawn font for Chinese, Japanese and Korean (CJK) as a fallback for Excalifont. Improved overal text wrapping algorithm, not only accounting for CJK, but covering various edge cases with white spaces and text-align center/right. Added support for multi-codepoint emojis wrapping. Offloaded SVG export to Web Workers, with an automatic fallback to the main thread if not supported or not desired.[#8530](https://github.com/excalidraw/excalidraw/pull/8530)
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 - Prefer user defined coordinates and dimensions when creating a frame using [`convertToExcalidrawElements`](https://docs.excalidraw.com/docs/@excalidraw/excalidraw/api/excalidraw-element-skeleton#converttoexcalidrawelements) [#8517](https://github.com/excalidraw/excalidraw/pull/8517)
 
 - `props.initialData` can now be a function that returns `ExcalidrawInitialDataState` or `Promise<ExcalidrawInitialDataState>`. [#8107](https://github.com/excalidraw/excalidraw/pull/8135)

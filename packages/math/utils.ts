@@ -28,3 +28,9 @@ export const average = (a: number, b: number) => (a + b) / 2;
 export const isFiniteNumber = (value: any): value is number => {
   return typeof value === "number" && Number.isFinite(value);
 };
+<<<<<<< HEAD
+=======
+
+export const isCloseTo = (a: number, b: number, precision = PRECISION) =>
+  Math.abs(a - b) < precision;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db

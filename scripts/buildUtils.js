@@ -82,7 +82,10 @@ const rawConfig = {
   entryPoints: ["index.ts"],
   bundle: true,
   format: "esm",
+<<<<<<< HEAD
   packages: "external",
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };
 
 // const BASE_PATH = `${path.resolve(`${__dirname}/..`)}`;

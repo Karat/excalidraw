@@ -36,7 +36,11 @@ import { trackEvent } from "../../analytics";
 import { useAppProps, useExcalidrawAppState } from "../App";
 import { isEmbeddableElement } from "../../element/typeChecks";
 import { getLinkHandleFromCoords } from "./helpers";
+<<<<<<< HEAD
 import { point, type GlobalPoint } from "../../../math";
+=======
+import { pointFrom, type GlobalPoint } from "../../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const CONTAINER_WIDTH = 320;
 const SPACE_BOTTOM = 85;
@@ -181,7 +185,11 @@ export const Hyperlink = ({
         element,
         elementsMap,
         appState,
+<<<<<<< HEAD
         point(event.clientX, event.clientY),
+=======
+        pointFrom(event.clientX, event.clientY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       ) as boolean;
       if (shouldHide) {
         timeoutId = window.setTimeout(() => {

@@ -25,7 +25,11 @@ import { API } from "../../tests/helpers/api";
 import { actionGroup } from "../../actions";
 import { isInGroup } from "../../groups";
 import type { Degrees } from "../../../math";
+<<<<<<< HEAD
 import { degreesToRadians, point, pointRotateRads } from "../../../math";
+=======
+import { degreesToRadians, pointFrom, pointRotateRads } from "../../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const { h } = window;
 const mouse = new Pointer("mouse");
@@ -264,8 +268,13 @@ describe("stats for a generic element", () => {
       rectangle.y + rectangle.height / 2,
     ];
     const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
       point(rectangle.x, rectangle.y),
       point(cx, cy),
+=======
+      pointFrom(rectangle.x, rectangle.y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       rectangle.angle,
     );
 
@@ -283,8 +292,13 @@ describe("stats for a generic element", () => {
     testInputProperty(rectangle, "angle", "A", 0, 45);
 
     let [newTopLeftX, newTopLeftY] = pointRotateRads(
+<<<<<<< HEAD
       point(rectangle.x, rectangle.y),
       point(cx, cy),
+=======
+      pointFrom(rectangle.x, rectangle.y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       rectangle.angle,
     );
 
@@ -294,8 +308,13 @@ describe("stats for a generic element", () => {
     testInputProperty(rectangle, "angle", "A", 45, 66);
 
     [newTopLeftX, newTopLeftY] = pointRotateRads(
+<<<<<<< HEAD
       point(rectangle.x, rectangle.y),
       point(cx, cy),
+=======
+      pointFrom(rectangle.x, rectangle.y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       rectangle.angle,
     );
     expect(newTopLeftX.toString()).not.toEqual(xInput.value);
@@ -311,8 +330,13 @@ describe("stats for a generic element", () => {
       rectangle.y + rectangle.height / 2,
     ];
     const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
       point(rectangle.x, rectangle.y),
       point(cx, cy),
+=======
+      pointFrom(rectangle.x, rectangle.y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       rectangle.angle,
     );
     testInputProperty(rectangle, "width", "W", rectangle.width, 400);
@@ -321,8 +345,13 @@ describe("stats for a generic element", () => {
       rectangle.y + rectangle.height / 2,
     ];
     let [currentTopLeftX, currentTopLeftY] = pointRotateRads(
+<<<<<<< HEAD
       point(rectangle.x, rectangle.y),
       point(cx, cy),
+=======
+      pointFrom(rectangle.x, rectangle.y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       rectangle.angle,
     );
     expect(currentTopLeftX).toBeCloseTo(topLeftX, 4);
@@ -334,8 +363,13 @@ describe("stats for a generic element", () => {
       rectangle.y + rectangle.height / 2,
     ];
     [currentTopLeftX, currentTopLeftY] = pointRotateRads(
+<<<<<<< HEAD
       point(rectangle.x, rectangle.y),
       point(cx, cy),
+=======
+      pointFrom(rectangle.x, rectangle.y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       rectangle.angle,
     );
 

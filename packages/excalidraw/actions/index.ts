@@ -88,3 +88,8 @@ export { actionToggleElementLock } from "./actionElementLock";
 export { actionToggleLinearEditor } from "./actionLinearEditor";
 
 export { actionToggleSearchMenu } from "./actionToggleSearchMenu";
+<<<<<<< HEAD
+=======
+
+export { actionToggleCropEditor } from "./actionCropEditor";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db

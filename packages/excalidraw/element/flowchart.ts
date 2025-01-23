@@ -29,7 +29,11 @@ import {
   isFlowchartNodeElement,
 } from "./typeChecks";
 import { invariant } from "../utils";
+<<<<<<< HEAD
 import { point, type LocalPoint } from "../../math";
+=======
+import { pointFrom, type LocalPoint } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { aabbForElement } from "../shapes";
 
 type LinkDirection = "up" | "right" | "down" | "left";
@@ -421,7 +425,11 @@ const createBindingArrow = (
     strokeColor: appState.currentItemStrokeColor,
     strokeStyle: appState.currentItemStrokeStyle,
     strokeWidth: appState.currentItemStrokeWidth,
+<<<<<<< HEAD
     points: [point(0, 0), point(endX, endY)],
+=======
+    points: [pointFrom(0, 0), pointFrom(endX, endY)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     elbowed: true,
   });
 

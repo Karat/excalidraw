@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import type Scene from "../scene/Scene";
 import type { ValueOf } from "../utility-types";
 import type {
@@ -357,3 +358,6 @@ export const getLineHeight = (fontFamily: FontFamilyValues) => {
 
   return lineHeight as ExcalidrawTextElement["lineHeight"];
 };
+=======
+export * from "./Fonts";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db

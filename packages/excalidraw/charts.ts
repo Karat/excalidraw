@@ -1,5 +1,9 @@
 import type { Radians } from "../math";
+<<<<<<< HEAD
 import { point } from "../math";
+=======
+import { pointFrom } from "../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import {
   COLOR_PALETTE,
   DEFAULT_CHART_COLOR_INDEX,
@@ -260,7 +264,11 @@ const chartLines = (
     x,
     y,
     width: chartWidth,
+<<<<<<< HEAD
     points: [point(0, 0), point(chartWidth, 0)],
+=======
+    points: [pointFrom(0, 0), pointFrom(chartWidth, 0)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   });
 
   const yLine = newLinearElement({
@@ -271,7 +279,11 @@ const chartLines = (
     x,
     y,
     height: chartHeight,
+<<<<<<< HEAD
     points: [point(0, 0), point(0, -chartHeight)],
+=======
+    points: [pointFrom(0, 0), pointFrom(0, -chartHeight)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   });
 
   const maxLine = newLinearElement({
@@ -284,7 +296,11 @@ const chartLines = (
     strokeStyle: "dotted",
     width: chartWidth,
     opacity: GRID_OPACITY,
+<<<<<<< HEAD
     points: [point(0, 0), point(chartWidth, 0)],
+=======
+    points: [pointFrom(0, 0), pointFrom(chartWidth, 0)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   });
 
   return [xLine, yLine, maxLine];
@@ -441,7 +457,11 @@ const chartTypeLine = (
       height: cy,
       strokeStyle: "dotted",
       opacity: GRID_OPACITY,
+<<<<<<< HEAD
       points: [point(0, 0), point(0, cy)],
+=======
+      points: [pointFrom(0, 0), pointFrom(0, cy)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     });
   });
 

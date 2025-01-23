@@ -17,7 +17,11 @@ import {
 } from "./typeChecks";
 import { getBoundTextShape, isPathALoop } from "../shapes";
 import type { GlobalPoint, LocalPoint, Polygon } from "../../math";
+<<<<<<< HEAD
 import { isPointWithinBounds, point } from "../../math";
+=======
+import { isPointWithinBounds, pointFrom } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 export const shouldTestInside = (element: ExcalidrawElement) => {
   if (element.type === "arrow") {
@@ -61,6 +65,7 @@ export const hitElementItself = <Point extends GlobalPoint | LocalPoint>({
   let hit = shouldTestInside(element)
     ? // Since `inShape` tests STRICTLY againt the insides of a shape
       // we would need `onShape` as well to include the "borders"
+<<<<<<< HEAD
       isPointInShape(point(x, y), shape) ||
       isPointOnShape(point(x, y), shape, threshold)
     : isPointOnShape(point(x, y), shape, threshold);
@@ -68,6 +73,15 @@ export const hitElementItself = <Point extends GlobalPoint | LocalPoint>({
   // hit test against a frame's name
   if (!hit && frameNameBound) {
     hit = isPointInShape(point(x, y), {
+=======
+      isPointInShape(pointFrom(x, y), shape) ||
+      isPointOnShape(pointFrom(x, y), shape, threshold)
+    : isPointOnShape(pointFrom(x, y), shape, threshold);
+
+  // hit test against a frame's name
+  if (!hit && frameNameBound) {
+    hit = isPointInShape(pointFrom(x, y), {
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       type: "polygon",
       data: getPolygonShape(frameNameBound as ExcalidrawRectangleElement)
         .data as Polygon<Point>,
@@ -89,7 +103,15 @@ export const hitElementBoundingBox = (
   y1 -= tolerance;
   x2 += tolerance;
   y2 += tolerance;
+<<<<<<< HEAD
   return isPointWithinBounds(point(x1, y1), point(x, y), point(x2, y2));
+=======
+  return isPointWithinBounds(
+    pointFrom(x1, y1),
+    pointFrom(x, y),
+    pointFrom(x2, y2),
+  );
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };
 
 export const hitElementBoundingBoxOnly = <
@@ -115,5 +137,9 @@ export const hitElementBoundText = <Point extends GlobalPoint | LocalPoint>(
   y: number,
   textShape: GeometricShape<Point> | null,
 ): boolean => {
+<<<<<<< HEAD
   return !!textShape && isPointInShape(point(x, y), textShape);
+=======
+  return !!textShape && isPointInShape(pointFrom(x, y), textShape);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };

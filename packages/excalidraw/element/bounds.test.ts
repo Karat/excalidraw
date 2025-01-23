@@ -1,5 +1,9 @@
 import type { LocalPoint } from "../../math";
+<<<<<<< HEAD
 import { point } from "../../math";
+=======
+import { pointFrom } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { ROUNDNESS } from "../constants";
 import { arrayToMap } from "../utils";
 import { getElementAbsoluteCoords, getElementBounds } from "./bounds";
@@ -125,9 +129,15 @@ describe("getElementBounds", () => {
         a: 0.6447741904932416,
       }),
       points: [
+<<<<<<< HEAD
         point<LocalPoint>(0, 0),
         point<LocalPoint>(67.33984375, 92.48828125),
         point<LocalPoint>(-102.7890625, 52.15625),
+=======
+        pointFrom<LocalPoint>(0, 0),
+        pointFrom<LocalPoint>(67.33984375, 92.48828125),
+        pointFrom<LocalPoint>(-102.7890625, 52.15625),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       ],
     } as ExcalidrawLinearElement;
 

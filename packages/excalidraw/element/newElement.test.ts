@@ -5,7 +5,11 @@ import { FONT_FAMILY, ROUNDNESS } from "../constants";
 import { isPrimitive } from "../utils";
 import type { ExcalidrawLinearElement } from "./types";
 import type { LocalPoint } from "../../math";
+<<<<<<< HEAD
 import { point } from "../../math";
+=======
+import { pointFrom } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const assertCloneObjects = (source: any, clone: any) => {
   for (const key in clone) {
@@ -38,7 +42,11 @@ describe("duplicating single elements", () => {
     element.__proto__ = { hello: "world" };
 
     mutateElement(element, {
+<<<<<<< HEAD
       points: [point<LocalPoint>(1, 2), point<LocalPoint>(3, 4)],
+=======
+      points: [pointFrom<LocalPoint>(1, 2), pointFrom<LocalPoint>(3, 4)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     });
 
     const copy = duplicateElement(null, new Map(), element);

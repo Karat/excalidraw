@@ -7,7 +7,11 @@ import { API } from "./helpers/api";
 import { KEYS } from "../keys";
 import { actionWrapTextInContainer } from "../actions/actionBoundText";
 import { arrayToMap } from "../utils";
+<<<<<<< HEAD
 import { point } from "../../math";
+=======
+import { pointFrom } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const { h } = window;
 
@@ -32,7 +36,16 @@ describe("element binding", () => {
       y: 0,
       width: 100,
       height: 1,
+<<<<<<< HEAD
       points: [point(0, 0), point(0, 0), point(100, 0), point(100, 0)],
+=======
+      points: [
+        pointFrom(0, 0),
+        pointFrom(0, 0),
+        pointFrom(100, 0),
+        pointFrom(100, 0),
+      ],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     });
     API.setElements([rect, arrow]);
     expect(arrow.startBinding).toBe(null);
@@ -310,7 +323,11 @@ describe("element binding", () => {
     const arrow1 = API.createElement({
       type: "arrow",
       id: "arrow1",
+<<<<<<< HEAD
       points: [point(0, 0), point(0, -87.45777932247563)],
+=======
+      points: [pointFrom(0, 0), pointFrom(0, -87.45777932247563)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       startBinding: {
         elementId: "rectangle1",
         focus: 0.2,
@@ -328,7 +345,11 @@ describe("element binding", () => {
     const arrow2 = API.createElement({
       type: "arrow",
       id: "arrow2",
+<<<<<<< HEAD
       points: [point(0, 0), point(0, -87.45777932247563)],
+=======
+      points: [pointFrom(0, 0), pointFrom(0, -87.45777932247563)],
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       startBinding: {
         elementId: "text1",
         focus: 0.2,

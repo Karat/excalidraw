@@ -34,7 +34,11 @@ import type {
 import {
   degreesToRadians,
   lineSegment,
+<<<<<<< HEAD
   point,
+=======
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   pointDistance,
   pointFromArray,
   pointRotateRads,
@@ -113,8 +117,13 @@ export class ElementBounds {
       const [minX, minY, maxX, maxY] = getBoundsFromPoints(
         element.points.map(([x, y]) =>
           pointRotateRads(
+<<<<<<< HEAD
             point(x, y),
             point(cx - element.x, cy - element.y),
+=======
+            pointFrom(x, y),
+            pointFrom(cx - element.x, cy - element.y),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             element.angle,
           ),
         ),
@@ -130,6 +139,7 @@ export class ElementBounds {
       bounds = getLinearElementRotatedBounds(element, cx, cy, elementsMap);
     } else if (element.type === "diamond") {
       const [x11, y11] = pointRotateRads(
+<<<<<<< HEAD
         point(cx, y1),
         point(cx, cy),
         element.angle,
@@ -147,6 +157,25 @@ export class ElementBounds {
       const [x21, y21] = pointRotateRads(
         point(x2, cy),
         point(cx, cy),
+=======
+        pointFrom(cx, y1),
+        pointFrom(cx, cy),
+        element.angle,
+      );
+      const [x12, y12] = pointRotateRads(
+        pointFrom(cx, y2),
+        pointFrom(cx, cy),
+        element.angle,
+      );
+      const [x22, y22] = pointRotateRads(
+        pointFrom(x1, cy),
+        pointFrom(cx, cy),
+        element.angle,
+      );
+      const [x21, y21] = pointRotateRads(
+        pointFrom(x2, cy),
+        pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         element.angle,
       );
       const minX = Math.min(x11, x12, x22, x21);
@@ -164,6 +193,7 @@ export class ElementBounds {
       bounds = [cx - ww, cy - hh, cx + ww, cy + hh];
     } else {
       const [x11, y11] = pointRotateRads(
+<<<<<<< HEAD
         point(x1, y1),
         point(cx, cy),
         element.angle,
@@ -181,6 +211,25 @@ export class ElementBounds {
       const [x21, y21] = pointRotateRads(
         point(x2, y1),
         point(cx, cy),
+=======
+        pointFrom(x1, y1),
+        pointFrom(cx, cy),
+        element.angle,
+      );
+      const [x12, y12] = pointRotateRads(
+        pointFrom(x1, y2),
+        pointFrom(cx, cy),
+        element.angle,
+      );
+      const [x22, y22] = pointRotateRads(
+        pointFrom(x2, y2),
+        pointFrom(cx, cy),
+        element.angle,
+      );
+      const [x21, y21] = pointRotateRads(
+        pointFrom(x2, y1),
+        pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         element.angle,
       );
       const minX = Math.min(x11, x12, x22, x21);
@@ -255,7 +304,11 @@ export const getElementLineSegments = (
     elementsMap,
   );
 
+<<<<<<< HEAD
   const center: GlobalPoint = point(cx, cy);
+=======
+  const center: GlobalPoint = pointFrom(cx, cy);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   if (isLinearElement(element) || isFreeDrawElement(element)) {
     const segments: LineSegment<GlobalPoint>[] = [];
@@ -266,7 +319,11 @@ export const getElementLineSegments = (
       segments.push(
         lineSegment(
           pointRotateRads(
+<<<<<<< HEAD
             point(
+=======
+            pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
               element.points[i][0] + element.x,
               element.points[i][1] + element.y,
             ),
@@ -274,7 +331,11 @@ export const getElementLineSegments = (
             element.angle,
           ),
           pointRotateRads(
+<<<<<<< HEAD
             point(
+=======
+            pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
               element.points[i + 1][0] + element.x,
               element.points[i + 1][1] + element.y,
             ),
@@ -470,7 +531,11 @@ export const getMinMaxXYFromCurvePathOps = (
   ops: Op[],
   transformXY?: (p: GlobalPoint) => GlobalPoint,
 ): Bounds => {
+<<<<<<< HEAD
   let currentP: GlobalPoint = point(0, 0);
+=======
+  let currentP: GlobalPoint = pointFrom(0, 0);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   const { minX, minY, maxX, maxY } = ops.reduce(
     (limits, { op, data }) => {
@@ -484,9 +549,15 @@ export const getMinMaxXYFromCurvePathOps = (
         // move operation does not draw anything; so, it always
         // returns false
       } else if (op === "bcurveTo") {
+<<<<<<< HEAD
         const _p1 = point<GlobalPoint>(data[0], data[1]);
         const _p2 = point<GlobalPoint>(data[2], data[3]);
         const _p3 = point<GlobalPoint>(data[4], data[5]);
+=======
+        const _p1 = pointFrom<GlobalPoint>(data[0], data[1]);
+        const _p2 = pointFrom<GlobalPoint>(data[2], data[3]);
+        const _p3 = pointFrom<GlobalPoint>(data[4], data[5]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
         const p1 = transformXY ? transformXY(_p1) : _p1;
         const p2 = transformXY ? transformXY(_p2) : _p2;
@@ -591,21 +662,35 @@ export const getArrowheadPoints = (
 
   invariant(data.length === 6, "Op data length is not 6");
 
+<<<<<<< HEAD
   const p3 = point(data[4], data[5]);
   const p2 = point(data[2], data[3]);
   const p1 = point(data[0], data[1]);
+=======
+  const p3 = pointFrom(data[4], data[5]);
+  const p2 = pointFrom(data[2], data[3]);
+  const p1 = pointFrom(data[0], data[1]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   // We need to find p0 of the bezier curve.
   // It is typically the last point of the previous
   // curve; it can also be the position of moveTo operation.
   const prevOp = ops[index - 1];
+<<<<<<< HEAD
   let p0 = point(0, 0);
+=======
+  let p0 = pointFrom(0, 0);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   if (prevOp.op === "move") {
     const p = pointFromArray(prevOp.data);
     invariant(p != null, "Op data is not a point");
     p0 = p;
   } else if (prevOp.op === "bcurveTo") {
+<<<<<<< HEAD
     p0 = point(prevOp.data[4], prevOp.data[5]);
+=======
+    p0 = pointFrom(prevOp.data[4], prevOp.data[5]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   }
 
   // B(t) = p0 * (1-t)^3 + 3p1 * t * (1-t)^2 + 3p2 * t^2 * (1-t) + p3 * t^3
@@ -671,6 +756,7 @@ export const getArrowheadPoints = (
 
   // Return points
   const [x3, y3] = pointRotateRads(
+<<<<<<< HEAD
     point(xs, ys),
     point(x2, y2),
     ((-angle * Math.PI) / 180) as Radians,
@@ -678,6 +764,15 @@ export const getArrowheadPoints = (
   const [x4, y4] = pointRotateRads(
     point(xs, ys),
     point(x2, y2),
+=======
+    pointFrom(xs, ys),
+    pointFrom(x2, y2),
+    ((-angle * Math.PI) / 180) as Radians,
+  );
+  const [x4, y4] = pointRotateRads(
+    pointFrom(xs, ys),
+    pointFrom(x2, y2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     degreesToRadians(angle),
   );
 
@@ -690,8 +785,13 @@ export const getArrowheadPoints = (
       const [px, py] = element.points.length > 1 ? element.points[1] : [0, 0];
 
       [ox, oy] = pointRotateRads(
+<<<<<<< HEAD
         point(x2 + minSize * 2, y2),
         point(x2, y2),
+=======
+        pointFrom(x2 + minSize * 2, y2),
+        pointFrom(x2, y2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         Math.atan2(py - y2, px - x2) as Radians,
       );
     } else {
@@ -701,8 +801,13 @@ export const getArrowheadPoints = (
           : [0, 0];
 
       [ox, oy] = pointRotateRads(
+<<<<<<< HEAD
         point(x2 - minSize * 2, y2),
         point(x2, y2),
+=======
+        pointFrom(x2 - minSize * 2, y2),
+        pointFrom(x2, y2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         Math.atan2(y2 - py, x2 - px) as Radians,
       );
     }
@@ -746,8 +851,13 @@ const getLinearElementRotatedBounds = (
   if (element.points.length < 2) {
     const [pointX, pointY] = element.points[0];
     const [x, y] = pointRotateRads(
+<<<<<<< HEAD
       point(element.x + pointX, element.y + pointY),
       point(cx, cy),
+=======
+      pointFrom(element.x + pointX, element.y + pointY),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       element.angle,
     );
 
@@ -775,8 +885,13 @@ const getLinearElementRotatedBounds = (
   const ops = getCurvePathOps(shape);
   const transformXY = ([x, y]: GlobalPoint) =>
     pointRotateRads<GlobalPoint>(
+<<<<<<< HEAD
       point(element.x + x, element.y + y),
       point(cx, cy),
+=======
+      pointFrom(element.x + x, element.y + y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       element.angle,
     );
   const res = getMinMaxXYFromCurvePathOps(ops, transformXY);
@@ -931,8 +1046,13 @@ export const getClosestElementBounds = (
   elements.forEach((element) => {
     const [x1, y1, x2, y2] = getElementBounds(element, elementsMap);
     const distance = pointDistance(
+<<<<<<< HEAD
       point((x1 + x2) / 2, (y1 + y2) / 2),
       point(from.x, from.y),
+=======
+      pointFrom((x1 + x2) / 2, (y1 + y2) / 2),
+      pointFrom(from.x, from.y),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     );
 
     if (distance < minDistance) {
@@ -990,7 +1110,11 @@ export const getVisibleSceneBounds = ({
 };
 
 export const getCenterForBounds = (bounds: Bounds): GlobalPoint =>
+<<<<<<< HEAD
   point(
+=======
+  pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     bounds[0] + (bounds[2] - bounds[0]) / 2,
     bounds[1] + (bounds[3] - bounds[1]) / 2,
   );

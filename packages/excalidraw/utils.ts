@@ -1,9 +1,14 @@
+<<<<<<< HEAD
+=======
+import Pool from "es6-promise-pool";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { average } from "../math";
 import { COLOR_PALETTE } from "./colors";
 import type { EVENT } from "./constants";
 import {
   DEFAULT_VERSION,
   FONT_FAMILY,
+  getFontFamilyFallbacks,
   isDarwin,
   WINDOWS_EMOJI_FALLBACK_FONT,
 } from "./constants";
@@ -89,8 +94,15 @@ export const getFontFamilyString = ({
 }) => {
   for (const [fontFamilyString, id] of Object.entries(FONT_FAMILY)) {
     if (id === fontFamily) {
+<<<<<<< HEAD
       // TODO: we should fallback first to generic family names first, rather than directly to the emoji font
       return `${fontFamilyString}, ${WINDOWS_EMOJI_FALLBACK_FONT}`;
+=======
+      // TODO: we should fallback first to generic family names first
+      return `${fontFamilyString}${getFontFamilyFallbacks(id)
+        .map((x) => `, ${x}`)
+        .join("")}`;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     }
   }
   return WINDOWS_EMOJI_FALLBACK_FONT;
@@ -721,6 +733,12 @@ export const isTestEnv = () => import.meta.env.MODE === "test";
 
 export const isDevEnv = () => import.meta.env.MODE === "development";
 
+<<<<<<< HEAD
+=======
+export const isServerEnv = () =>
+  typeof process !== "undefined" && !!process?.env?.NODE_ENV;
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 export const wrapEvent = <T extends Event>(name: EVENT, nativeEvent: T) => {
   return new CustomEvent(name, {
     detail: {
@@ -1170,3 +1188,54 @@ export const safelyParseJSON = (json: string): Record<string, any> | null => {
     return null;
   }
 };
+<<<<<<< HEAD
+=======
+// extending the missing types
+// relying on the [Index, T] to keep a correct order
+type TPromisePool<T, Index = number> = Pool<[Index, T][]> & {
+  addEventListener: (
+    type: "fulfilled",
+    listener: (event: { data: { result: [Index, T] } }) => void,
+  ) => (event: { data: { result: [Index, T] } }) => void;
+  removeEventListener: (
+    type: "fulfilled",
+    listener: (event: { data: { result: [Index, T] } }) => void,
+  ) => void;
+};
+
+export class PromisePool<T> {
+  private readonly pool: TPromisePool<T>;
+  private readonly entries: Record<number, T> = {};
+
+  constructor(
+    source: IterableIterator<Promise<void | readonly [number, T]>>,
+    concurrency: number,
+  ) {
+    this.pool = new Pool(
+      source as unknown as () => void | PromiseLike<[number, T][]>,
+      concurrency,
+    ) as TPromisePool<T>;
+  }
+
+  public all() {
+    const listener = (event: { data: { result: void | [number, T] } }) => {
+      if (event.data.result) {
+        // by default pool does not return the results, so we are gathering them manually
+        // with the correct call order (represented by the index in the tuple)
+        const [index, value] = event.data.result;
+        this.entries[index] = value;
+      }
+    };
+
+    this.pool.addEventListener("fulfilled", listener);
+
+    return this.pool.start().then(() => {
+      setTimeout(() => {
+        this.pool.removeEventListener("fulfilled", listener);
+      });
+
+      return Object.values(this.entries);
+    });
+  }
+}
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db

@@ -279,6 +279,10 @@ function CommandPaletteInner({
         actionManager.actions.increaseFontSize,
         actionManager.actions.decreaseFontSize,
         actionManager.actions.toggleLinearEditor,
+<<<<<<< HEAD
+=======
+        actionManager.actions.cropEditor,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         actionLink,
       ].map((action: Action) =>
         actionToCommand(

@@ -5,7 +5,11 @@ import { t } from "../i18n";
 import type { History } from "../history";
 import { HistoryChangedEvent } from "../history";
 import type { AppClassProperties, AppState } from "../types";
+<<<<<<< HEAD
 import { KEYS } from "../keys";
+=======
+import { KEYS, matchKey } from "../keys";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { arrayToMap } from "../utils";
 import { isWindows } from "../constants";
 import type { SceneElementsMap } from "../element/types";
@@ -63,9 +67,13 @@ export const createUndoAction: ActionCreator = (history, store) => ({
       ),
     ),
   keyTest: (event) =>
+<<<<<<< HEAD
     event[KEYS.CTRL_OR_CMD] &&
     event.key.toLowerCase() === KEYS.Z &&
     !event.shiftKey,
+=======
+    event[KEYS.CTRL_OR_CMD] && matchKey(event, KEYS.Z) && !event.shiftKey,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   PanelComponent: ({ updateData, data }) => {
     const { isUndoStackEmpty } = useEmitter<HistoryChangedEvent>(
       history.onHistoryChangedEmitter,
@@ -104,10 +112,15 @@ export const createRedoAction: ActionCreator = (history, store) => ({
       ),
     ),
   keyTest: (event) =>
+<<<<<<< HEAD
     (event[KEYS.CTRL_OR_CMD] &&
       event.shiftKey &&
       event.key.toLowerCase() === KEYS.Z) ||
     (isWindows && event.ctrlKey && !event.shiftKey && event.key === KEYS.Y),
+=======
+    (event[KEYS.CTRL_OR_CMD] && event.shiftKey && matchKey(event, KEYS.Z)) ||
+    (isWindows && event.ctrlKey && !event.shiftKey && matchKey(event, KEYS.Y)),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   PanelComponent: ({ updateData, data }) => {
     const { isRedoStackEmpty } = useEmitter(
       history.onHistoryChangedEmitter,

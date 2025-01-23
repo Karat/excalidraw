@@ -24,7 +24,11 @@ import {
 import { canChangeRoundness } from "./comparisons";
 import type { EmbedsValidationStatus } from "../types";
 import {
+<<<<<<< HEAD
   point,
+=======
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   pointDistance,
   type GlobalPoint,
   type LocalPoint,
@@ -408,7 +412,11 @@ export const _generateElementShape = (
       // initial position to it
       const points = element.points.length
         ? element.points
+<<<<<<< HEAD
         : [point<LocalPoint>(0, 0)];
+=======
+        : [pointFrom<LocalPoint>(0, 0)];
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
       if (isElbowArrow(element)) {
         shape = [

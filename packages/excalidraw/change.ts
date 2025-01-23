@@ -17,13 +17,25 @@ import {
   hasBoundTextElement,
   isBindableElement,
   isBoundToContainer,
+<<<<<<< HEAD
+=======
+  isImageElement,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   isTextElement,
 } from "./element/typeChecks";
 import type {
   ExcalidrawElement,
+<<<<<<< HEAD
   ExcalidrawLinearElement,
   ExcalidrawTextElement,
   NonDeleted,
+=======
+  ExcalidrawImageElement,
+  ExcalidrawLinearElement,
+  ExcalidrawTextElement,
+  NonDeleted,
+  Ordered,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   OrderedExcalidrawElement,
   SceneElementsMap,
 } from "./element/types";
@@ -626,6 +638,21 @@ export class AppStateChange implements Change<AppState> {
             );
 
             break;
+<<<<<<< HEAD
+=======
+          case "croppingElementId": {
+            const croppingElementId = nextAppState[key];
+            const element =
+              croppingElementId && nextElements.get(croppingElementId);
+
+            if (element && !element.isDeleted) {
+              visibleDifferenceFlag.value = true;
+            } else {
+              nextAppState[key] = null;
+            }
+            break;
+          }
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           case "editingGroupId":
             const editingGroupId = nextAppState[key];
 
@@ -756,6 +783,10 @@ export class AppStateChange implements Change<AppState> {
       selectedElementIds,
       editingLinearElementId,
       selectedLinearElementId,
+<<<<<<< HEAD
+=======
+      croppingElementId,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       ...standaloneProps
     } = delta as ObservedAppState;
 
@@ -779,7 +810,14 @@ export class AppStateChange implements Change<AppState> {
   }
 }
 
+<<<<<<< HEAD
 type ElementPartial = Omit<ElementUpdate<OrderedExcalidrawElement>, "seed">;
+=======
+type ElementPartial<T extends ExcalidrawElement = ExcalidrawElement> = Omit<
+  ElementUpdate<Ordered<T>>,
+  "seed"
+>;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 /**
  * Elements change is a low level primitive to capture a change between two sets of elements.
@@ -1216,6 +1254,21 @@ export class ElementsChange implements Change<SceneElementsMap> {
       });
     }
 
+<<<<<<< HEAD
+=======
+    if (isImageElement(element)) {
+      const _delta = delta as Delta<ElementPartial<ExcalidrawImageElement>>;
+      // we want to override `crop` only if modified so that we don't reset
+      // when undoing/redoing unrelated change
+      if (_delta.deleted.crop || _delta.inserted.crop) {
+        Object.assign(directlyApplicablePartial, {
+          // apply change verbatim
+          crop: _delta.inserted.crop ?? null,
+        });
+      }
+    }
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     if (!flags.containsVisibleDifference) {
       // strip away fractional as even if it would be different, it doesn't have to result in visible change
       const { index, ...rest } = directlyApplicablePartial;

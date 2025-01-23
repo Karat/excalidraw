@@ -11,6 +11,10 @@ import type { Device, InteractiveCanvasAppState, Zoom } from "../types";
 import {
   isElbowArrow,
   isFrameLikeElement,
+<<<<<<< HEAD
+=======
+  isImageElement,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   isLinearElement,
 } from "./typeChecks";
 import {
@@ -19,7 +23,11 @@ import {
   isIOS,
 } from "../constants";
 import type { Radians } from "../../math";
+<<<<<<< HEAD
 import { point, pointRotateRads } from "../../math";
+=======
+import { pointFrom, pointRotateRads } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 export type TransformHandleDirection =
   | "n"
@@ -95,8 +103,13 @@ const generateTransformHandle = (
   angle: Radians,
 ): TransformHandle => {
   const [xx, yy] = pointRotateRads(
+<<<<<<< HEAD
     point(x + width / 2, y + height / 2),
     point(cx, cy),
+=======
+    pointFrom(x + width / 2, y + height / 2),
+    pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     angle,
   );
   return [xx - width / 2, yy - height / 2, width, height];
@@ -129,6 +142,7 @@ export const getTransformHandlesFromCoords = (
   pointerType: PointerType,
   omitSides: { [T in TransformHandleType]?: boolean } = {},
   margin = 4,
+  spacing = DEFAULT_TRANSFORM_HANDLE_SPACING,
 ): TransformHandles => {
   const size = transformHandleSizes[pointerType];
   const handleWidth = size / zoom.value;
@@ -140,8 +154,12 @@ export const getTransformHandlesFromCoords = (
   const width = x2 - x1;
   const height = y2 - y1;
   const dashedLineMargin = margin / zoom.value;
+<<<<<<< HEAD
   const centeringOffset =
     (size - DEFAULT_TRANSFORM_HANDLE_SPACING * 2) / (2 * zoom.value);
+=======
+  const centeringOffset = (size - spacing * 2) / (2 * zoom.value);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   const transformHandles: TransformHandles = {
     nw: omitSides.nw
@@ -301,8 +319,15 @@ export const getTransformHandles = (
       rotation: true,
     };
   }
+<<<<<<< HEAD
   const dashedLineMargin = isLinearElement(element)
     ? DEFAULT_TRANSFORM_HANDLE_SPACING + 8
+=======
+  const margin = isLinearElement(element)
+    ? DEFAULT_TRANSFORM_HANDLE_SPACING + 8
+    : isImageElement(element)
+    ? 0
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     : DEFAULT_TRANSFORM_HANDLE_SPACING;
   return getTransformHandlesFromCoords(
     getElementAbsoluteCoords(element, elementsMap, true),
@@ -310,7 +335,8 @@ export const getTransformHandles = (
     zoom,
     pointerType,
     omitSides,
-    dashedLineMargin,
+    margin,
+    isImageElement(element) ? 0 : undefined,
   );
 };
 

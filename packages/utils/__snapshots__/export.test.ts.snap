@@ -11,6 +11,10 @@ exports[`exportToSvg > with default arguments 1`] = `
   },
   "collaborators": Map {},
   "contextMenu": null,
+<<<<<<< HEAD
+=======
+  "croppingElementId": null,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   "currentChartType": "bar",
   "currentHoveredFontFamily": null,
   "currentItemArrowType": "round",
@@ -53,6 +57,10 @@ exports[`exportToSvg > with default arguments 1`] = `
   "gridSize": 20,
   "gridStep": 5,
   "isBindingEnabled": true,
+<<<<<<< HEAD
+=======
+  "isCropping": false,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   "isLoading": false,
   "isResizing": false,
   "isRotating": false,

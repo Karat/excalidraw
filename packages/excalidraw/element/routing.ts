@@ -1,6 +1,10 @@
 import type { Radians } from "../../math";
 import {
+<<<<<<< HEAD
   point,
+=======
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   pointScaleFromOrigin,
   pointTranslate,
   vector,
@@ -743,6 +747,7 @@ const getDonglePosition = (
 ): GlobalPoint => {
   switch (heading) {
     case HEADING_UP:
+<<<<<<< HEAD
       return point(p[0], bounds[1]);
     case HEADING_RIGHT:
       return point(bounds[2], p[1]);
@@ -750,6 +755,15 @@ const getDonglePosition = (
       return point(p[0], bounds[3]);
   }
   return point(bounds[0], p[1]);
+=======
+      return pointFrom(p[0], bounds[1]);
+    case HEADING_RIGHT:
+      return pointFrom(bounds[2], p[1]);
+    case HEADING_DOWN:
+      return pointFrom(p[0], bounds[3]);
+  }
+  return pointFrom(bounds[0], p[1]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };
 
 const estimateSegmentCount = (

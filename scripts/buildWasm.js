@@ -8,12 +8,20 @@ const wasmModules = [
   {
     pkg: `../node_modules/fonteditor-core`,
     src: `./wasm/woff2.wasm`,
+<<<<<<< HEAD
     dest: `../packages/excalidraw/fonts/wasm/woff2.wasm.ts`,
+=======
+    dest: `../packages/excalidraw/fonts/wasm/woff2-wasm.ts`,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   },
   {
     pkg: `../node_modules/harfbuzzjs`,
     src: `./wasm/hb-subset.wasm`,
+<<<<<<< HEAD
     dest: `../packages/excalidraw/fonts/wasm/hb-subset.wasm.ts`,
+=======
+    dest: `../packages/excalidraw/fonts/wasm/hb-subset-wasm.ts`,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   },
 ];
 
@@ -35,7 +43,11 @@ for (const { pkg, src, dest } of wasmModules) {
   const licenseContent = fs.readFileSync(licensePath, "utf-8") || "";
   const base64 = fs.readFileSync(sourcePath, "base64");
   const content = `// GENERATED CODE -- DO NOT EDIT!
+<<<<<<< HEAD
 /* eslint-disable prettier/prettier */
+=======
+/* eslint-disable */
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 // @ts-nocheck
 
 /**

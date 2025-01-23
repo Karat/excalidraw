@@ -28,7 +28,11 @@ import { getBoundTextElementPosition } from "../element/textElement";
 import { createPasteEvent } from "../clipboard";
 import { arrayToMap, cloneJSON } from "../utils";
 import type { LocalPoint } from "../../math";
+<<<<<<< HEAD
 import { point, type Radians } from "../../math";
+=======
+import { pointFrom, type Radians } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const { h } = window;
 const mouse = new Pointer("mouse");
@@ -146,9 +150,15 @@ const createLinearElementWithCurveInsideMinMaxPoints = (
     link: null,
     locked: false,
     points: [
+<<<<<<< HEAD
       point<LocalPoint>(0, 0),
       point<LocalPoint>(-922.4761962890625, 300.3277587890625),
       point<LocalPoint>(828.0126953125, 410.51605224609375),
+=======
+      pointFrom<LocalPoint>(0, 0),
+      pointFrom<LocalPoint>(-922.4761962890625, 300.3277587890625),
+      pointFrom<LocalPoint>(828.0126953125, 410.51605224609375),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     ],
   });
 };

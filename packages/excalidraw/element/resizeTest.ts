@@ -20,10 +20,17 @@ import type { AppState, Device, Zoom } from "../types";
 import type { Bounds } from "./bounds";
 import { getElementAbsoluteCoords } from "./bounds";
 import { SIDE_RESIZING_THRESHOLD } from "../constants";
+<<<<<<< HEAD
 import { isLinearElement } from "./typeChecks";
 import type { GlobalPoint, LineSegment, LocalPoint } from "../../math";
 import {
   point,
+=======
+import { isImageElement, isLinearElement } from "./typeChecks";
+import type { GlobalPoint, LineSegment, LocalPoint } from "../../math";
+import {
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   pointOnLineSegment,
   pointRotateRads,
   type Radians,
@@ -90,18 +97,38 @@ export const resizeTest = <Point extends GlobalPoint | LocalPoint>(
 
     // do not resize from the sides for linear elements with only two points
     if (!(isLinearElement(element) && element.points.length <= 2)) {
+<<<<<<< HEAD
       const SPACING = SIDE_RESIZING_THRESHOLD / zoom.value;
       const sides = getSelectionBorders(
         point(x1 - SPACING, y1 - SPACING),
         point(x2 + SPACING, y2 + SPACING),
         point(cx, cy),
+=======
+      const SPACING = isImageElement(element)
+        ? 0
+        : SIDE_RESIZING_THRESHOLD / zoom.value;
+      const ZOOMED_SIDE_RESIZING_THRESHOLD =
+        SIDE_RESIZING_THRESHOLD / zoom.value;
+      const sides = getSelectionBorders(
+        pointFrom(x1 - SPACING, y1 - SPACING),
+        pointFrom(x2 + SPACING, y2 + SPACING),
+        pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         element.angle,
       );
 
       for (const [dir, side] of Object.entries(sides)) {
         // test to see if x, y are on the line segment
         if (
+<<<<<<< HEAD
           pointOnLineSegment(point(x, y), side as LineSegment<Point>, SPACING)
+=======
+          pointOnLineSegment(
+            pointFrom(x, y),
+            side as LineSegment<Point>,
+            ZOOMED_SIDE_RESIZING_THRESHOLD,
+          )
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         ) {
           return dir as TransformHandleType;
         }
@@ -178,9 +205,15 @@ export const getTransformHandleTypeFromCoords = <
     const SPACING = SIDE_RESIZING_THRESHOLD / zoom.value;
 
     const sides = getSelectionBorders(
+<<<<<<< HEAD
       point(x1 - SPACING, y1 - SPACING),
       point(x2 + SPACING, y2 + SPACING),
       point(cx, cy),
+=======
+      pointFrom(x1 - SPACING, y1 - SPACING),
+      pointFrom(x2 + SPACING, y2 + SPACING),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       0 as Radians,
     );
 
@@ -188,7 +221,11 @@ export const getTransformHandleTypeFromCoords = <
       // test to see if x, y are on the line segment
       if (
         pointOnLineSegment(
+<<<<<<< HEAD
           point(scenePointerX, scenePointerY),
+=======
+          pointFrom(scenePointerX, scenePointerY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           side as LineSegment<Point>,
           SPACING,
         )
@@ -265,10 +302,17 @@ const getSelectionBorders = <Point extends LocalPoint | GlobalPoint>(
   center: Point,
   angle: Radians,
 ) => {
+<<<<<<< HEAD
   const topLeft = pointRotateRads(point(x1, y1), center, angle);
   const topRight = pointRotateRads(point(x2, y1), center, angle);
   const bottomLeft = pointRotateRads(point(x1, y2), center, angle);
   const bottomRight = pointRotateRads(point(x2, y2), center, angle);
+=======
+  const topLeft = pointRotateRads(pointFrom(x1, y1), center, angle);
+  const topRight = pointRotateRads(pointFrom(x2, y1), center, angle);
+  const bottomLeft = pointRotateRads(pointFrom(x1, y2), center, angle);
+  const bottomRight = pointRotateRads(pointFrom(x2, y2), center, angle);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   return {
     n: [topLeft, topRight],

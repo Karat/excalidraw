@@ -4,7 +4,11 @@ import type { DragInputCallbackType } from "./DragInput";
 import { getStepSizedValue, moveElement } from "./utils";
 import type Scene from "../../scene/Scene";
 import type { AppState } from "../../types";
+<<<<<<< HEAD
 import { point, pointRotateRads } from "../../../math";
+=======
+import { pointFrom, pointRotateRads } from "../../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 interface PositionProps {
   property: "x" | "y";
@@ -33,8 +37,13 @@ const handlePositionChange: DragInputCallbackType<"x" | "y"> = ({
     origElement.y + origElement.height / 2,
   ];
   const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
     point(origElement.x, origElement.y),
     point(cx, cy),
+=======
+    pointFrom(origElement.x, origElement.y),
+    pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     origElement.angle,
   );
 
@@ -93,8 +102,13 @@ const Position = ({
   appState,
 }: PositionProps) => {
   const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
     point(element.x, element.y),
     point(element.x + element.width / 2, element.y + element.height / 2),
+=======
+    pointFrom(element.x, element.y),
+    pointFrom(element.x + element.width / 2, element.y + element.height / 2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     element.angle,
   );
   const value =

@@ -21,6 +21,10 @@ import { t } from "../../i18n";
 import { fontPickerKeyHandler } from "./keyboardNavHandlers";
 import { Fonts } from "../../fonts";
 import type { ValueOf } from "../../utility-types";
+<<<<<<< HEAD
+=======
+import { FontFamilyNormalIcon } from "../icons";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 export interface FontDescriptor {
   value: number;
@@ -62,12 +66,23 @@ export const FontPickerList = React.memo(
     const allFonts = useMemo(
       () =>
         Array.from(Fonts.registered.entries())
+<<<<<<< HEAD
           .filter(([_, { metadata }]) => !metadata.serverSide)
           .map(([familyId, { metadata, fonts }]) => {
             const fontDescriptor = {
               value: familyId,
               icon: metadata.icon,
               text: fonts[0].fontFace.family,
+=======
+          .filter(
+            ([_, { metadata }]) => !metadata.serverSide && !metadata.fallback,
+          )
+          .map(([familyId, { metadata, fontFaces }]) => {
+            const fontDescriptor = {
+              value: familyId,
+              icon: metadata.icon ?? FontFamilyNormalIcon,
+              text: fontFaces[0]?.fontFace?.family ?? "Unknown",
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             };
 
             if (metadata.deprecated) {
@@ -89,7 +104,11 @@ export const FontPickerList = React.memo(
     );
 
     const sceneFamilies = useMemo(
+<<<<<<< HEAD
       () => new Set(fonts.getSceneFontFamilies()),
+=======
+      () => new Set(fonts.getSceneFamilies()),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       // cache per selected font family, so hover re-render won't mess it up
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [selectedFontFamily],

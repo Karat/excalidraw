@@ -57,7 +57,11 @@ import {
   getNormalizedZoom,
 } from "../scene";
 import type { LocalPoint, Radians } from "../../math";
+<<<<<<< HEAD
 import { isFiniteNumber, point } from "../../math";
+=======
+import { isFiniteNumber, pointFrom } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 type RestoredAppState = Omit<
   AppState,
@@ -190,6 +194,10 @@ const restoreElementWithProperties = <
   }
 
   return {
+    // spread the original element properties to not lose unknown ones
+    // for forward-compatibility
+    ...element,
+    // normalized properties
     ...base,
     ...getNormalizedDimensions(base),
     ...extra,
@@ -258,6 +266,7 @@ const restoreElement = (
         status: element.status || "pending",
         fileId: element.fileId,
         scale: element.scale || [1, 1],
+        crop: element.crop ?? null,
       });
     case "line":
     // @ts-ignore LEGACY type
@@ -268,7 +277,11 @@ const restoreElement = (
       let y = element.y;
       let points = // migrate old arrow model to new one
         !Array.isArray(element.points) || element.points.length < 2
+<<<<<<< HEAD
           ? [point(0, 0), point(element.width, element.height)]
+=======
+          ? [pointFrom(0, 0), pointFrom(element.width, element.height)]
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           : element.points;
 
       if (points[0][0] !== 0 || points[0][1] !== 0) {
@@ -296,7 +309,11 @@ const restoreElement = (
       let y: number | undefined = element.y;
       let points: readonly LocalPoint[] | undefined = // migrate old arrow model to new one
         !Array.isArray(element.points) || element.points.length < 2
+<<<<<<< HEAD
           ? [point(0, 0), point(element.width, element.height)]
+=======
+          ? [pointFrom(0, 0), pointFrom(element.width, element.height)]
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           : element.points;
 
       if (points[0][0] !== 0 || points[0][1] !== 0) {

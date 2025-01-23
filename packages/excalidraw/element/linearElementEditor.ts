@@ -49,7 +49,11 @@ import type Scene from "../scene/Scene";
 import type { Radians } from "../../math";
 import {
   pointCenter,
+<<<<<<< HEAD
   point,
+=======
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   pointRotateRads,
   pointsEqual,
   vector,
@@ -108,7 +112,11 @@ export class LinearElementEditor {
     this.elementId = element.id as string & {
       _brand: "excalidrawLinearElementId";
     };
+<<<<<<< HEAD
     if (!pointsEqual(element.points[0], point(0, 0))) {
+=======
+    if (!pointsEqual(element.points[0], pointFrom(0, 0))) {
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       console.error("Linear element is not normalized", Error().stack);
     }
 
@@ -287,7 +295,11 @@ export class LinearElementEditor {
           element,
           elementsMap,
           referencePoint,
+<<<<<<< HEAD
           point(scenePointerX, scenePointerY),
+=======
+          pointFrom(scenePointerX, scenePointerY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           event[KEYS.CTRL_OR_CMD] ? null : app.getEffectiveGridSize(),
         );
 
@@ -296,7 +308,11 @@ export class LinearElementEditor {
           [
             {
               index: selectedIndex,
+<<<<<<< HEAD
               point: point(
+=======
+              point: pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
                 width + referencePoint[0],
                 height + referencePoint[1],
               ),
@@ -329,7 +345,11 @@ export class LinearElementEditor {
                     scenePointerY - linearElementEditor.pointerOffset.y,
                     event[KEYS.CTRL_OR_CMD] ? null : app.getEffectiveGridSize(),
                   )
+<<<<<<< HEAD
                 : point(
+=======
+                : pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
                     element.points[pointIndex][0] + deltaX,
                     element.points[pointIndex][1] + deltaY,
                   );
@@ -590,11 +610,19 @@ export class LinearElementEditor {
       linearElementEditor.segmentMidPointHoveredCoords;
     if (existingSegmentMidpointHitCoords) {
       const distance = pointDistance(
+<<<<<<< HEAD
         point(
           existingSegmentMidpointHitCoords[0],
           existingSegmentMidpointHitCoords[1],
         ),
         point(scenePointer.x, scenePointer.y),
+=======
+        pointFrom(
+          existingSegmentMidpointHitCoords[0],
+          existingSegmentMidpointHitCoords[1],
+        ),
+        pointFrom(scenePointer.x, scenePointer.y),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       );
       if (distance <= threshold) {
         return existingSegmentMidpointHitCoords;
@@ -606,8 +634,13 @@ export class LinearElementEditor {
     while (index < midPoints.length) {
       if (midPoints[index] !== null) {
         const distance = pointDistance(
+<<<<<<< HEAD
           point(midPoints[index]![0], midPoints[index]![1]),
           point(scenePointer.x, scenePointer.y),
+=======
+          pointFrom(midPoints[index]![0], midPoints[index]![1]),
+          pointFrom(scenePointer.x, scenePointer.y),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         );
         if (distance <= threshold) {
           return midPoints[index];
@@ -626,8 +659,13 @@ export class LinearElementEditor {
     zoom: AppState["zoom"],
   ) {
     let distance = pointDistance(
+<<<<<<< HEAD
       point(startPoint[0], startPoint[1]),
       point(endPoint[0], endPoint[1]),
+=======
+      pointFrom(startPoint[0], startPoint[1]),
+      pointFrom(endPoint[0], endPoint[1]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     );
     if (element.points.length > 2 && element.roundness) {
       distance = getBezierCurveLength(element, endPoint);
@@ -829,11 +867,19 @@ export class LinearElementEditor {
     const targetPoint =
       clickedPointIndex > -1 &&
       pointRotateRads(
+<<<<<<< HEAD
         point(
           element.x + element.points[clickedPointIndex][0],
           element.y + element.points[clickedPointIndex][1],
         ),
         point(cx, cy),
+=======
+        pointFrom(
+          element.x + element.points[clickedPointIndex][0],
+          element.y + element.points[clickedPointIndex][1],
+        ),
+        pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         element.angle,
       );
 
@@ -928,11 +974,19 @@ export class LinearElementEditor {
         element,
         elementsMap,
         lastCommittedPoint,
+<<<<<<< HEAD
         point(scenePointerX, scenePointerY),
         event[KEYS.CTRL_OR_CMD] ? null : app.getEffectiveGridSize(),
       );
 
       newPoint = point(
+=======
+        pointFrom(scenePointerX, scenePointerY),
+        event[KEYS.CTRL_OR_CMD] ? null : app.getEffectiveGridSize(),
+      );
+
+      newPoint = pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         width + lastCommittedPoint[0],
         height + lastCommittedPoint[1],
       );
@@ -984,8 +1038,13 @@ export class LinearElementEditor {
 
     const { x, y } = element;
     return pointRotateRads(
+<<<<<<< HEAD
       point(x + p[0], y + p[1]),
       point(cx, cy),
+=======
+      pointFrom(x + p[0], y + p[1]),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       element.angle,
     );
   }
@@ -1001,8 +1060,13 @@ export class LinearElementEditor {
     return element.points.map((p) => {
       const { x, y } = element;
       return pointRotateRads(
+<<<<<<< HEAD
         point(x + p[0], y + p[1]),
         point(cx, cy),
+=======
+        pointFrom(x + p[0], y + p[1]),
+        pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         element.angle,
       );
     });
@@ -1025,8 +1089,17 @@ export class LinearElementEditor {
     const { x, y } = element;
 
     return p
+<<<<<<< HEAD
       ? pointRotateRads(point(x + p[0], y + p[1]), point(cx, cy), element.angle)
       : pointRotateRads(point(x, y), point(cx, cy), element.angle);
+=======
+      ? pointRotateRads(
+          pointFrom(x + p[0], y + p[1]),
+          pointFrom(cx, cy),
+          element.angle,
+        )
+      : pointRotateRads(pointFrom(x, y), pointFrom(cx, cy), element.angle);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   }
 
   static pointFromAbsoluteCoords(
@@ -1036,7 +1109,11 @@ export class LinearElementEditor {
   ): LocalPoint {
     if (isElbowArrow(element)) {
       // No rotation for elbow arrows
+<<<<<<< HEAD
       return point(
+=======
+      return pointFrom(
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         absoluteCoords[0] - element.x,
         absoluteCoords[1] - element.y,
       );
@@ -1046,11 +1123,19 @@ export class LinearElementEditor {
     const cx = (x1 + x2) / 2;
     const cy = (y1 + y2) / 2;
     const [x, y] = pointRotateRads(
+<<<<<<< HEAD
       point(absoluteCoords[0], absoluteCoords[1]),
       point(cx, cy),
       -element.angle as Radians,
     );
     return point(x - element.x, y - element.y);
+=======
+      pointFrom(absoluteCoords[0], absoluteCoords[1]),
+      pointFrom(cx, cy),
+      -element.angle as Radians,
+    );
+    return pointFrom(x - element.x, y - element.y);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   }
 
   static getPointIndexUnderCursor(
@@ -1071,7 +1156,11 @@ export class LinearElementEditor {
     while (--idx > -1) {
       const p = pointHandles[idx];
       if (
+<<<<<<< HEAD
         pointDistance(point(x, y), point(p[0], p[1])) * zoom.value <
+=======
+        pointDistance(pointFrom(x, y), pointFrom(p[0], p[1])) * zoom.value <
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         // +1px to account for outline stroke
         LinearElementEditor.POINT_HANDLE_SIZE + 1
       ) {
@@ -1093,12 +1182,21 @@ export class LinearElementEditor {
     const cx = (x1 + x2) / 2;
     const cy = (y1 + y2) / 2;
     const [rotatedX, rotatedY] = pointRotateRads(
+<<<<<<< HEAD
       point(pointerOnGrid[0], pointerOnGrid[1]),
       point(cx, cy),
       -element.angle as Radians,
     );
 
     return point(rotatedX - element.x, rotatedY - element.y);
+=======
+      pointFrom(pointerOnGrid[0], pointerOnGrid[1]),
+      pointFrom(cx, cy),
+      -element.angle as Radians,
+    );
+
+    return pointFrom(rotatedX - element.x, rotatedY - element.y);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   }
 
   /**
@@ -1118,7 +1216,11 @@ export class LinearElementEditor {
 
     return {
       points: points.map((p) => {
+<<<<<<< HEAD
         return point(p[0] - offsetX, p[1] - offsetY);
+=======
+        return pointFrom(p[0] - offsetX, p[1] - offsetY);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       }),
       x: element.x + offsetX,
       y: element.y + offsetY,
@@ -1172,8 +1274,13 @@ export class LinearElementEditor {
         }
         acc.push(
           nextPoint
+<<<<<<< HEAD
             ? point((p[0] + nextPoint[0]) / 2, (p[1] + nextPoint[1]) / 2)
             : point(p[0], p[1]),
+=======
+            ? pointFrom((p[0] + nextPoint[0]) / 2, (p[1] + nextPoint[1]) / 2)
+            : pointFrom(p[0], p[1]),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         );
 
         nextSelectedIndices.push(indexCursor + 1);
@@ -1194,7 +1301,11 @@ export class LinearElementEditor {
         [
           {
             index: element.points.length - 1,
+<<<<<<< HEAD
             point: point(lastPoint[0] + 30, lastPoint[1] + 30),
+=======
+            point: pointFrom(lastPoint[0] + 30, lastPoint[1] + 30),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           },
         ],
         elementsMap,
@@ -1235,7 +1346,13 @@ export class LinearElementEditor {
     const nextPoints = element.points.reduce((acc: LocalPoint[], p, idx) => {
       if (!pointIndices.includes(idx)) {
         acc.push(
+<<<<<<< HEAD
           !acc.length ? point(0, 0) : point(p[0] - offsetX, p[1] - offsetY),
+=======
+          !acc.length
+            ? pointFrom(0, 0)
+            : pointFrom(p[0] - offsetX, p[1] - offsetY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         );
       }
       return acc;
@@ -1312,9 +1429,15 @@ export class LinearElementEditor {
         const deltaY =
           selectedPointData.point[1] - points[selectedPointData.index][1];
 
+<<<<<<< HEAD
         return point(p[0] + deltaX - offsetX, p[1] + deltaY - offsetY);
       }
       return offsetX || offsetY ? point(p[0] - offsetX, p[1] - offsetY) : p;
+=======
+        return pointFrom(p[0] + deltaX - offsetX, p[1] + deltaY - offsetY);
+      }
+      return offsetX || offsetY ? pointFrom(p[0] - offsetX, p[1] - offsetY) : p;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     });
 
     LinearElementEditor._updatePoints(
@@ -1368,8 +1491,13 @@ export class LinearElementEditor {
 
     const origin = linearElementEditor.pointerDownState.origin!;
     const dist = pointDistance(
+<<<<<<< HEAD
       point(origin.x, origin.y),
       point(pointerCoords.x, pointerCoords.y),
+=======
+      pointFrom(origin.x, origin.y),
+      pointFrom(pointerCoords.x, pointerCoords.y),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     );
     if (
       !appState.editingLinearElement &&
@@ -1493,8 +1621,13 @@ export class LinearElementEditor {
       const dX = prevCenterX - nextCenterX;
       const dY = prevCenterY - nextCenterY;
       const rotated = pointRotateRads(
+<<<<<<< HEAD
         point(offsetX, offsetY),
         point(dX, dY),
+=======
+        pointFrom(offsetX, offsetY),
+        pointFrom(dX, dY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         element.angle,
       );
       mutateElement(element, {
@@ -1540,8 +1673,13 @@ export class LinearElementEditor {
     );
 
     return pointRotateRads(
+<<<<<<< HEAD
       point(width, height),
       point(0, 0),
+=======
+      pointFrom(width, height),
+      pointFrom(0, 0),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       -element.angle as Radians,
     );
   }
@@ -1611,36 +1749,63 @@ export class LinearElementEditor {
       );
     const boundTextX2 = boundTextX1 + boundTextElement.width;
     const boundTextY2 = boundTextY1 + boundTextElement.height;
+<<<<<<< HEAD
     const centerPoint = point(cx, cy);
 
     const topLeftRotatedPoint = pointRotateRads(
       point(x1, y1),
+=======
+    const centerPoint = pointFrom(cx, cy);
+
+    const topLeftRotatedPoint = pointRotateRads(
+      pointFrom(x1, y1),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       centerPoint,
       element.angle,
     );
     const topRightRotatedPoint = pointRotateRads(
+<<<<<<< HEAD
       point(x2, y1),
+=======
+      pointFrom(x2, y1),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       centerPoint,
       element.angle,
     );
 
     const counterRotateBoundTextTopLeft = pointRotateRads(
+<<<<<<< HEAD
       point(boundTextX1, boundTextY1),
+=======
+      pointFrom(boundTextX1, boundTextY1),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       centerPoint,
       -element.angle as Radians,
     );
     const counterRotateBoundTextTopRight = pointRotateRads(
+<<<<<<< HEAD
       point(boundTextX2, boundTextY1),
+=======
+      pointFrom(boundTextX2, boundTextY1),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       centerPoint,
       -element.angle as Radians,
     );
     const counterRotateBoundTextBottomLeft = pointRotateRads(
+<<<<<<< HEAD
       point(boundTextX1, boundTextY2),
+=======
+      pointFrom(boundTextX1, boundTextY2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       centerPoint,
       -element.angle as Radians,
     );
     const counterRotateBoundTextBottomRight = pointRotateRads(
+<<<<<<< HEAD
       point(boundTextX2, boundTextY2),
+=======
+      pointFrom(boundTextX2, boundTextY2),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       centerPoint,
       -element.angle as Radians,
     );

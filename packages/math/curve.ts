@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { point, pointRotateRads } from "./point";
+=======
+import { pointFrom, pointRotateRads } from "./point";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import type { Curve, GlobalPoint, LocalPoint, Radians } from "./types";
 
 /**
@@ -43,10 +47,17 @@ export function curveToBezier<Point extends LocalPoint | GlobalPoint>(
   const out: Point[] = [];
   if (len === 3) {
     out.push(
+<<<<<<< HEAD
       point(pointsIn[0][0], pointsIn[0][1]), // Points need to be cloned
       point(pointsIn[1][0], pointsIn[1][1]), // Points need to be cloned
       point(pointsIn[2][0], pointsIn[2][1]), // Points need to be cloned
       point(pointsIn[2][0], pointsIn[2][1]), // Points need to be cloned
+=======
+      pointFrom(pointsIn[0][0], pointsIn[0][1]), // Points need to be cloned
+      pointFrom(pointsIn[1][0], pointsIn[1][1]), // Points need to be cloned
+      pointFrom(pointsIn[2][0], pointsIn[2][1]), // Points need to be cloned
+      pointFrom(pointsIn[2][0], pointsIn[2][1]), // Points need to be cloned
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     );
   } else {
     const points: Point[] = [];
@@ -59,6 +70,7 @@ export function curveToBezier<Point extends LocalPoint | GlobalPoint>(
     }
     const b: Point[] = [];
     const s = 1 - curveTightness;
+<<<<<<< HEAD
     out.push(point(points[0][0], points[0][1]));
     for (let i = 1; i + 2 < points.length; i++) {
       const cachedVertArray = points[i];
@@ -72,6 +84,21 @@ export function curveToBezier<Point extends LocalPoint | GlobalPoint>(
         points[i + 1][1] + (s * points[i][1] - s * points[i + 2][1]) / 6,
       );
       b[3] = point(points[i + 1][0], points[i + 1][1]);
+=======
+    out.push(pointFrom(points[0][0], points[0][1]));
+    for (let i = 1; i + 2 < points.length; i++) {
+      const cachedVertArray = points[i];
+      b[0] = pointFrom(cachedVertArray[0], cachedVertArray[1]);
+      b[1] = pointFrom(
+        cachedVertArray[0] + (s * points[i + 1][0] - s * points[i - 1][0]) / 6,
+        cachedVertArray[1] + (s * points[i + 1][1] - s * points[i - 1][1]) / 6,
+      );
+      b[2] = pointFrom(
+        points[i + 1][0] + (s * points[i][0] - s * points[i + 2][0]) / 6,
+        points[i + 1][1] + (s * points[i][1] - s * points[i + 2][1]) / 6,
+      );
+      b[3] = pointFrom(points[i + 1][0], points[i + 1][1]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       out.push(b[1], b[2], b[3]);
     }
   }
@@ -102,7 +129,11 @@ export const cubicBezierPoint = <Point extends LocalPoint | GlobalPoint>(
     3 * (1 - t) * Math.pow(t, 2) * p2[1] +
     Math.pow(t, 3) * p3[1];
 
+<<<<<<< HEAD
   return point(x, y);
+=======
+  return pointFrom(x, y);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };
 
 /**

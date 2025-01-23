@@ -132,6 +132,18 @@ export type IframeData =
       | { type: "document"; srcdoc: (theme: Theme) => string }
     );
 
+<<<<<<< HEAD
+=======
+export type ImageCrop = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  naturalWidth: number;
+  naturalHeight: number;
+};
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 export type ExcalidrawImageElement = _ExcalidrawElementBase &
   Readonly<{
     type: "image";
@@ -140,6 +152,8 @@ export type ExcalidrawImageElement = _ExcalidrawElementBase &
     status: "pending" | "saved" | "error";
     /** X and Y scale factors <-1, 1>, used for image axis flipping */
     scale: [number, number];
+    /** whether an element is cropped */
+    crop: ImageCrop | null;
   }>;
 
 export type InitializedExcalidrawImageElement = MarkNonNullable<

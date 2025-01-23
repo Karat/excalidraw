@@ -1,5 +1,9 @@
 import type { Radians } from "../../../math";
+<<<<<<< HEAD
 import { point, pointRotateRads } from "../../../math";
+=======
+import { pointFrom, pointRotateRads } from "../../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import {
   bindOrUnbindLinearElements,
   updateBoundElements,
@@ -151,8 +155,11 @@ export const resizeElement = (
     nextHeight = Math.max(nextHeight, minHeight);
   }
 
+<<<<<<< HEAD
   const { width: oldWidth, height: oldHeight } = latestElement;
 
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   mutateElement(
     latestElement,
     {
@@ -201,7 +208,11 @@ export const resizeElement = (
   }
 
   updateBoundElements(latestElement, elementsMap, {
+<<<<<<< HEAD
     oldSize: { width: oldWidth, height: oldHeight },
+=======
+    newSize: { width: nextWidth, height: nextHeight },
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   });
 
   if (boundTextElement && boundTextFont) {
@@ -231,8 +242,13 @@ export const moveElement = (
     originalElement.y + originalElement.height / 2,
   ];
   const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
     point(originalElement.x, originalElement.y),
     point(cx, cy),
+=======
+    pointFrom(originalElement.x, originalElement.y),
+    pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     originalElement.angle,
   );
 
@@ -240,8 +256,13 @@ export const moveElement = (
   const changeInY = newTopLeftY - topLeftY;
 
   const [x, y] = pointRotateRads(
+<<<<<<< HEAD
     point(newTopLeftX, newTopLeftY),
     point(cx + changeInX, cy + changeInY),
+=======
+    pointFrom(newTopLeftX, newTopLeftY),
+    pointFrom(cx + changeInX, cy + changeInY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     -originalElement.angle as Radians,
   );
 

@@ -20,7 +20,11 @@ import { getAtomicUnits, getStepSizedValue, isPropertyEditable } from "./utils";
 import { getElementsInAtomicUnit, resizeElement } from "./utils";
 import type { AtomicUnit } from "./utils";
 import { MIN_WIDTH_OR_HEIGHT } from "../../constants";
+<<<<<<< HEAD
 import { point, type GlobalPoint } from "../../../math";
+=======
+import { pointFrom, type GlobalPoint } from "../../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 interface MultiDimensionProps {
   property: "width" | "height";
@@ -69,7 +73,10 @@ const resizeElementInGroup = (
   originalElementsMap: ElementsMap,
 ) => {
   const updates = getResizedUpdates(anchorX, anchorY, scale, origElement);
+<<<<<<< HEAD
   const { width: oldWidth, height: oldHeight } = latestElement;
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
   mutateElement(latestElement, updates, false);
   const boundTextElement = getBoundTextElement(
@@ -79,7 +86,11 @@ const resizeElementInGroup = (
   if (boundTextElement) {
     const newFontSize = boundTextElement.fontSize * scale;
     updateBoundElements(latestElement, elementsMap, {
+<<<<<<< HEAD
       oldSize: { width: oldWidth, height: oldHeight },
+=======
+      newSize: { width: updates.width, height: updates.height },
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     });
     const latestBoundTextElement = elementsMap.get(boundTextElement.id);
     if (latestBoundTextElement && isTextElement(latestBoundTextElement)) {
@@ -182,7 +193,11 @@ const handleDimensionChange: DragInputCallbackType<
           nextHeight,
           initialHeight,
           aspectRatio,
+<<<<<<< HEAD
           point(x1, y1),
+=======
+          pointFrom(x1, y1),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           property,
           latestElements,
           originalElements,
@@ -287,7 +302,11 @@ const handleDimensionChange: DragInputCallbackType<
         nextHeight,
         initialHeight,
         aspectRatio,
+<<<<<<< HEAD
         point(x1, y1),
+=======
+        pointFrom(x1, y1),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         property,
         latestElements,
         originalElements,

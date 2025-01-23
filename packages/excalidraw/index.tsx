@@ -2,11 +2,19 @@ import React, { useEffect } from "react";
 import { InitializeApp } from "./components/InitializeApp";
 import App from "./components/App";
 import { isShallowEqual } from "./utils";
+<<<<<<< HEAD
 
 import "./css/app.scss";
 import "./css/styles.scss";
 import "./fonts/assets/fonts.css";
 import polyfill from "./polyfill";
+=======
+import polyfill from "./polyfill";
+
+import "./css/app.scss";
+import "./css/styles.scss";
+import "./fonts/fonts.css";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 import type { AppProps, ExcalidrawProps } from "./types";
 import { defaultLang } from "./i18n";
@@ -291,4 +299,7 @@ export {
 
 export { DiagramToCodePlugin } from "./components/DiagramToCodePlugin/DiagramToCodePlugin";
 export { getDataURL } from "./data/blob";
+<<<<<<< HEAD
 export default Excalidraw;
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db

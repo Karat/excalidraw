@@ -13,7 +13,11 @@ import { useMemo } from "react";
 import { getElementsInAtomicUnit, moveElement } from "./utils";
 import type { AtomicUnit } from "./utils";
 import type { AppState } from "../../types";
+<<<<<<< HEAD
 import { point, pointRotateRads } from "../../../math";
+=======
+import { pointFrom, pointRotateRads } from "../../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 interface MultiPositionProps {
   property: "x" | "y";
@@ -44,8 +48,13 @@ const moveElements = (
       origElement.y + origElement.height / 2,
     ];
     const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
       point(origElement.x, origElement.y),
       point(cx, cy),
+=======
+      pointFrom(origElement.x, origElement.y),
+      pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       origElement.angle,
     );
 
@@ -97,8 +106,13 @@ const moveGroupTo = (
       ];
 
       const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
         point(latestElement.x, latestElement.y),
         point(cx, cy),
+=======
+        pointFrom(latestElement.x, latestElement.y),
+        pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         latestElement.angle,
       );
 
@@ -171,8 +185,13 @@ const handlePositionChange: DragInputCallbackType<
             origElement.y + origElement.height / 2,
           ];
           const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
             point(origElement.x, origElement.y),
             point(cx, cy),
+=======
+            pointFrom(origElement.x, origElement.y),
+            pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             origElement.angle,
           );
 
@@ -241,8 +260,13 @@ const MultiPosition = ({
         const [cx, cy] = [el.x + el.width / 2, el.y + el.height / 2];
 
         const [topLeftX, topLeftY] = pointRotateRads(
+<<<<<<< HEAD
           point(el.x, el.y),
           point(cx, cy),
+=======
+          pointFrom(el.x, el.y),
+          pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           el.angle,
         );
 

@@ -116,7 +116,11 @@ import {
 import { mutateElbowArrow } from "../element/routing";
 import { LinearElementEditor } from "../element/linearElementEditor";
 import type { LocalPoint } from "../../math";
+<<<<<<< HEAD
 import { point, vector } from "../../math";
+=======
+import { pointFrom, vector } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const FONT_SIZE_RELATIVE_INCREASE_STEP = 0.1;
 
@@ -1651,7 +1655,11 @@ export const actionChangeArrowType = register({
             elementsMap,
             [finalStartPoint, finalEndPoint].map(
               (p): LocalPoint =>
+<<<<<<< HEAD
                 point(p[0] - newElement.x, p[1] - newElement.y),
+=======
+                pointFrom(p[0] - newElement.x, p[1] - newElement.y),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             ),
             vector(0, 0),
             {

@@ -68,6 +68,7 @@ const generateRoomId = async () => {
   return bytesToHexString(buffer);
 };
 
+<<<<<<< HEAD
 export const getCollabServer = async (
   collabServerUrl: string,
 ): Promise<{
@@ -80,6 +81,8 @@ export const getCollabServer = async (
   };
 }
 
+=======
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 export type EncryptedData = {
   data: ArrayBuffer;
   iv: Uint8Array;

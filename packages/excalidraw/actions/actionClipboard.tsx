@@ -147,14 +147,35 @@ export const actionCopyAsSvg = register({
           name: app.getName(),
         },
       );
+
+      const selectedElements = app.scene.getSelectedElements({
+        selectedElementIds: appState.selectedElementIds,
+        includeBoundTextElement: true,
+        includeElementsInFrames: true,
+      });
+
       return {
+<<<<<<< HEAD
+=======
+        appState: {
+          toast: {
+            message: t("toast.copyToClipboardAsSvg", {
+              exportSelection: selectedElements.length
+                ? t("toast.selection")
+                : t("toast.canvas"),
+              exportColorScheme: appState.exportWithDarkMode
+                ? t("buttons.darkMode")
+                : t("buttons.lightMode"),
+            }),
+          },
+        },
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         storeAction: StoreAction.NONE,
       };
     } catch (error: any) {
       console.error(error);
       return {
         appState: {
-          ...appState,
           errorMessage: error.message,
         },
         storeAction: StoreAction.NONE,

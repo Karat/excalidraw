@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { BOUND_TEXT_PADDING, FONT_FAMILY } from "../constants";
+=======
+import { FONT_FAMILY } from "../constants";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import { getLineHeight } from "../fonts";
 import { API } from "../tests/helpers/api";
 import {
@@ -6,6 +10,7 @@ import {
   getContainerCoords,
   getBoundTextMaxWidth,
   getBoundTextMaxHeight,
+<<<<<<< HEAD
   wrapText,
   detectLineHeight,
   getLineHeightInPx,
@@ -235,6 +240,12 @@ describe("Test parseTokens", () => {
     ]);
   });
 });
+=======
+  detectLineHeight,
+  getLineHeightInPx,
+} from "./textElement";
+import type { ExcalidrawTextElementWithContainer } from "./types";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 describe("Test measureText", () => {
   describe("Test getContainerCoords", () => {

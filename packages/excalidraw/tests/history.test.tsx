@@ -46,7 +46,11 @@ import { HistoryEntry } from "../history";
 import { AppStateChange, ElementsChange } from "../change";
 import { Snapshot, StoreAction } from "../store";
 import type { LocalPoint, Radians } from "../../math";
+<<<<<<< HEAD
 import { point } from "../../math";
+=======
+import { pointFrom } from "../../math";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const { h } = window;
 
@@ -2041,9 +2045,15 @@ describe("history", () => {
             width: 178.9000000000001,
             height: 236.10000000000002,
             points: [
+<<<<<<< HEAD
               point(0, 0),
               point(178.9000000000001, 0),
               point(178.9000000000001, 236.10000000000002),
+=======
+              pointFrom(0, 0),
+              pointFrom(178.9000000000001, 0),
+              pointFrom(178.9000000000001, 236.10000000000002),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             ],
             startBinding: {
               elementId: "KPrBI4g_v9qUB1XxYLgSz",
@@ -2159,11 +2169,19 @@ describe("history", () => {
         elements: [
           newElementWith(h.elements[0] as ExcalidrawLinearElement, {
             points: [
+<<<<<<< HEAD
               point(0, 0),
               point(5, 5),
               point(10, 10),
               point(15, 15),
               point(20, 20),
+=======
+              pointFrom(0, 0),
+              pointFrom(5, 5),
+              pointFrom(10, 10),
+              pointFrom(15, 15),
+              pointFrom(20, 20),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
             ] as LocalPoint[],
           }),
         ],

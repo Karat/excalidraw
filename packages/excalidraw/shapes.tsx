@@ -1,6 +1,10 @@
 import {
   isPoint,
+<<<<<<< HEAD
   point,
+=======
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   pointDistance,
   pointFromPair,
   pointRotateRads,
@@ -167,6 +171,7 @@ export const getElementShape = <Point extends GlobalPoint | LocalPoint>(
         ? getClosedCurveShape<Point>(
             element,
             roughShape,
+<<<<<<< HEAD
             point<Point>(element.x, element.y),
             element.angle,
             point(cx, cy),
@@ -176,6 +181,17 @@ export const getElementShape = <Point extends GlobalPoint | LocalPoint>(
             point<Point>(element.x, element.y),
             element.angle,
             point(cx, cy),
+=======
+            pointFrom<Point>(element.x, element.y),
+            element.angle,
+            pointFrom(cx, cy),
+          )
+        : getCurveShape<Point>(
+            roughShape,
+            pointFrom<Point>(element.x, element.y),
+            element.angle,
+            pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           );
     }
 
@@ -186,7 +202,11 @@ export const getElementShape = <Point extends GlobalPoint | LocalPoint>(
       const [, , , , cx, cy] = getElementAbsoluteCoords(element, elementsMap);
       return getFreedrawShape(
         element,
+<<<<<<< HEAD
         point(cx, cy),
+=======
+        pointFrom(cx, cy),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         shouldTestInside(element),
       );
     }
@@ -233,7 +253,11 @@ export const getControlPointsForBezierCurve = <
   }
 
   const ops = getCurvePathOps(shape[0]);
+<<<<<<< HEAD
   let currentP = point<P>(0, 0);
+=======
+  let currentP = pointFrom<P>(0, 0);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   let index = 0;
   let minDistance = Infinity;
   let controlPoints: P[] | null = null;
@@ -249,9 +273,15 @@ export const getControlPointsForBezierCurve = <
     }
     if (op === "bcurveTo") {
       const p0 = currentP;
+<<<<<<< HEAD
       const p1 = point<P>(data[0], data[1]);
       const p2 = point<P>(data[2], data[3]);
       const p3 = point<P>(data[4], data[5]);
+=======
+      const p1 = pointFrom<P>(data[0], data[1]);
+      const p2 = pointFrom<P>(data[2], data[3]);
+      const p3 = pointFrom<P>(data[4], data[5]);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       const distance = pointDistance(p3, endPoint);
       if (distance < minDistance) {
         minDistance = distance;
@@ -279,7 +309,11 @@ export const getBezierXY = <P extends GlobalPoint | LocalPoint>(
     p0[idx] * Math.pow(t, 3);
   const tx = equation(t, 0);
   const ty = equation(t, 1);
+<<<<<<< HEAD
   return point(tx, ty);
+=======
+  return pointFrom(tx, ty);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 };
 
 const getPointsInBezierCurve = <P extends GlobalPoint | LocalPoint>(
@@ -301,12 +335,20 @@ const getPointsInBezierCurve = <P extends GlobalPoint | LocalPoint>(
       controlPoints[3],
       t,
     );
+<<<<<<< HEAD
     pointsOnCurve.push(point(p[0], p[1]));
+=======
+    pointsOnCurve.push(pointFrom(p[0], p[1]));
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     t -= 0.05;
   }
   if (pointsOnCurve.length) {
     if (pointsEqual(pointsOnCurve.at(-1)!, endPoint)) {
+<<<<<<< HEAD
       pointsOnCurve.push(point(endPoint[0], endPoint[1]));
+=======
+      pointsOnCurve.push(pointFrom(endPoint[0], endPoint[1]));
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     }
   }
   return pointsOnCurve;
@@ -393,24 +435,42 @@ export const aabbForElement = (
     midY: element.y + element.height / 2,
   };
 
+<<<<<<< HEAD
   const center = point(bbox.midX, bbox.midY);
   const [topLeftX, topLeftY] = pointRotateRads(
     point(bbox.minX, bbox.minY),
+=======
+  const center = pointFrom(bbox.midX, bbox.midY);
+  const [topLeftX, topLeftY] = pointRotateRads(
+    pointFrom(bbox.minX, bbox.minY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     center,
     element.angle,
   );
   const [topRightX, topRightY] = pointRotateRads(
+<<<<<<< HEAD
     point(bbox.maxX, bbox.minY),
+=======
+    pointFrom(bbox.maxX, bbox.minY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     center,
     element.angle,
   );
   const [bottomRightX, bottomRightY] = pointRotateRads(
+<<<<<<< HEAD
     point(bbox.maxX, bbox.maxY),
+=======
+    pointFrom(bbox.maxX, bbox.maxY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     center,
     element.angle,
   );
   const [bottomLeftX, bottomLeftY] = pointRotateRads(
+<<<<<<< HEAD
     point(bbox.minX, bbox.maxY),
+=======
+    pointFrom(bbox.minX, bbox.maxY),
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     center,
     element.angle,
   );
@@ -442,6 +502,7 @@ export const pointInsideBounds = <P extends GlobalPoint | LocalPoint>(
   p[0] > bounds[0] && p[0] < bounds[2] && p[1] > bounds[1] && p[1] < bounds[3];
 
 export const aabbsOverlapping = (a: Bounds, b: Bounds) =>
+<<<<<<< HEAD
   pointInsideBounds(point(a[0], a[1]), b) ||
   pointInsideBounds(point(a[2], a[1]), b) ||
   pointInsideBounds(point(a[2], a[3]), b) ||
@@ -450,6 +511,16 @@ export const aabbsOverlapping = (a: Bounds, b: Bounds) =>
   pointInsideBounds(point(b[2], b[1]), a) ||
   pointInsideBounds(point(b[2], b[3]), a) ||
   pointInsideBounds(point(b[0], b[3]), a);
+=======
+  pointInsideBounds(pointFrom(a[0], a[1]), b) ||
+  pointInsideBounds(pointFrom(a[2], a[1]), b) ||
+  pointInsideBounds(pointFrom(a[2], a[3]), b) ||
+  pointInsideBounds(pointFrom(a[0], a[3]), b) ||
+  pointInsideBounds(pointFrom(b[0], b[1]), a) ||
+  pointInsideBounds(pointFrom(b[2], b[1]), a) ||
+  pointInsideBounds(pointFrom(b[2], b[3]), a) ||
+  pointInsideBounds(pointFrom(b[0], b[3]), a);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 export const getCornerRadius = (x: number, element: ExcalidrawElement) => {
   if (

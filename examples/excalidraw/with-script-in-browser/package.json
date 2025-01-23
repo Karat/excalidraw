@@ -13,7 +13,11 @@
   },
   "scripts": {
     "build:workspace": "yarn workspace @excalidraw/excalidraw run build:esm && yarn copy:assets",
+<<<<<<< HEAD
     "copy:assets": "cp ../../../packages/excalidraw/dist/browser/prod/excalidraw-assets/*.woff2 ./public",
+=======
+    "copy:assets": "cp -r ../../../packages/excalidraw/dist/prod/fonts ./public",
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
     "start": "yarn build:workspace && vite",
     "build": "yarn build:workspace && vite build",
     "build:preview": "yarn build && vite preview --port 5002"

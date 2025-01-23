@@ -7,7 +7,11 @@ import {
   SVG_NS,
 } from "../constants";
 import { normalizeLink, toValidURL } from "../data/url";
+<<<<<<< HEAD
 import { getElementAbsoluteCoords } from "../element";
+=======
+import { getElementAbsoluteCoords, hashString } from "../element";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 import {
   createPlaceholderEmbeddableLabel,
   getEmbedLink,
@@ -37,6 +41,10 @@ import { getFontFamilyString, isRTL, isTestEnv } from "../utils";
 import { getFreeDrawSvgPath, IMAGE_INVERT_FILTER } from "./renderElement";
 import { getVerticalOffset } from "../fonts";
 import { getCornerRadius, isPathALoop } from "../shapes";
+<<<<<<< HEAD
+=======
+import { getUncroppedWidthAndHeight } from "../element/cropElement";
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 
 const roughSVGDrawWithPrecision = (
   rsvg: RoughSVG,
@@ -410,19 +418,55 @@ const renderElementToSvg = (
       const fileData =
         isInitializedImageElement(element) && files[element.fileId];
       if (fileData) {
+<<<<<<< HEAD
         const symbolId = `image-${fileData.id}`;
+=======
+        const { reuseImages = true } = renderConfig;
+
+        let symbolId = `image-${fileData.id}`;
+
+        let uncroppedWidth = element.width;
+        let uncroppedHeight = element.height;
+        if (element.crop) {
+          ({ width: uncroppedWidth, height: uncroppedHeight } =
+            getUncroppedWidthAndHeight(element));
+
+          symbolId = `image-crop-${fileData.id}-${hashString(
+            `${uncroppedWidth}x${uncroppedHeight}`,
+          )}`;
+        }
+
+        if (!reuseImages) {
+          symbolId = `image-${element.id}`;
+        }
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         let symbol = svgRoot.querySelector(`#${symbolId}`);
         if (!symbol) {
           symbol = svgRoot.ownerDocument!.createElementNS(SVG_NS, "symbol");
           symbol.id = symbolId;
 
           const image = svgRoot.ownerDocument!.createElementNS(SVG_NS, "image");
+<<<<<<< HEAD
 
           image.setAttribute("width", "100%");
           image.setAttribute("height", "100%");
           image.setAttribute("href", fileData.dataURL);
           image.setAttribute("preserveAspectRatio", "none");
 
+=======
+          image.setAttribute("href", fileData.dataURL);
+          image.setAttribute("preserveAspectRatio", "none");
+
+          if (element.crop || !reuseImages) {
+            image.setAttribute("width", `${uncroppedWidth}`);
+            image.setAttribute("height", `${uncroppedHeight}`);
+          } else {
+            image.setAttribute("width", "100%");
+            image.setAttribute("height", "100%");
+          }
+
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           symbol.appendChild(image);
 
           root.prepend(symbol);
@@ -439,8 +483,28 @@ const renderElementToSvg = (
           use.setAttribute("filter", IMAGE_INVERT_FILTER);
         }
 
+<<<<<<< HEAD
         use.setAttribute("width", `${width}`);
         use.setAttribute("height", `${height}`);
+=======
+        let normalizedCropX = 0;
+        let normalizedCropY = 0;
+
+        if (element.crop) {
+          const { width: uncroppedWidth, height: uncroppedHeight } =
+            getUncroppedWidthAndHeight(element);
+          normalizedCropX =
+            element.crop.x / (element.crop.naturalWidth / uncroppedWidth);
+          normalizedCropY =
+            element.crop.y / (element.crop.naturalHeight / uncroppedHeight);
+        }
+
+        const adjustedCenterX = cx + normalizedCropX;
+        const adjustedCenterY = cy + normalizedCropY;
+
+        use.setAttribute("width", `${width + normalizedCropX}`);
+        use.setAttribute("height", `${height + normalizedCropY}`);
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         use.setAttribute("opacity", `${opacity}`);
 
         // We first apply `scale` transforms (horizontal/vertical mirroring)
@@ -450,21 +514,60 @@ const renderElementToSvg = (
         // the transformations correctly (the transform-origin was not being
         // applied correctly).
         if (element.scale[0] !== 1 || element.scale[1] !== 1) {
+<<<<<<< HEAD
           const translateX = element.scale[0] !== 1 ? -width : 0;
           const translateY = element.scale[1] !== 1 ? -height : 0;
           use.setAttribute(
             "transform",
             `scale(${element.scale[0]}, ${element.scale[1]}) translate(${translateX} ${translateY})`,
+=======
+          use.setAttribute(
+            "transform",
+            `translate(${adjustedCenterX} ${adjustedCenterY}) scale(${
+              element.scale[0]
+            } ${
+              element.scale[1]
+            }) translate(${-adjustedCenterX} ${-adjustedCenterY})`,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
           );
         }
 
         const g = svgRoot.ownerDocument!.createElementNS(SVG_NS, "g");
+<<<<<<< HEAD
         g.appendChild(use);
         g.setAttribute(
           "transform",
           `translate(${offsetX || 0} ${
             offsetY || 0
           }) rotate(${degree} ${cx} ${cy})`,
+=======
+
+        if (element.crop) {
+          const mask = svgRoot.ownerDocument!.createElementNS(SVG_NS, "mask");
+          mask.setAttribute("id", `mask-image-crop-${element.id}`);
+          mask.setAttribute("fill", "#fff");
+          const maskRect = svgRoot.ownerDocument!.createElementNS(
+            SVG_NS,
+            "rect",
+          );
+
+          maskRect.setAttribute("x", `${normalizedCropX}`);
+          maskRect.setAttribute("y", `${normalizedCropY}`);
+          maskRect.setAttribute("width", `${width}`);
+          maskRect.setAttribute("height", `${height}`);
+
+          mask.appendChild(maskRect);
+          root.appendChild(mask);
+          g.setAttribute("mask", `url(#${mask.id})`);
+        }
+
+        g.appendChild(use);
+        g.setAttribute(
+          "transform",
+          `translate(${offsetX - normalizedCropX} ${
+            offsetY - normalizedCropY
+          }) rotate(${degree} ${adjustedCenterX} ${adjustedCenterY})`,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
         );
 
         if (element.roundness) {

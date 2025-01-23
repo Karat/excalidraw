@@ -7,7 +7,11 @@ import {
 import type { Curve } from "../math";
 import {
   lineSegment,
+<<<<<<< HEAD
   point,
+=======
+  pointFrom,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   polygonIncludesPoint,
   pointOnLineSegment,
   pointOnPolygon,
@@ -110,7 +114,11 @@ const polyLineFromCurve = <Point extends LocalPoint | GlobalPoint>(
   for (let i = 0; i < segments; i++) {
     t += increment;
     if (t <= 1) {
+<<<<<<< HEAD
       const nextPoint: Point = point(equation(t, 0), equation(t, 1));
+=======
+      const nextPoint: Point = pointFrom(equation(t, 0), equation(t, 1));
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
       lineSegments.push(lineSegment(startingPoint, nextPoint));
       startingPoint = nextPoint;
     }

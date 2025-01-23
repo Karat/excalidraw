@@ -167,10 +167,18 @@ export const exportToSvg = async ({
   renderEmbeddables,
   exportingFrame,
   skipInliningFonts,
+<<<<<<< HEAD
+=======
+  reuseImages,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 }: Omit<ExportOpts, "getDimensions"> & {
   exportPadding?: number;
   renderEmbeddables?: boolean;
   skipInliningFonts?: true;
+<<<<<<< HEAD
+=======
+  reuseImages?: boolean;
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
 }): Promise<SVGSVGElement> => {
   const { elements: restoredElements, appState: restoredAppState } = restore(
     { elements, appState },
@@ -187,6 +195,10 @@ export const exportToSvg = async ({
     exportingFrame,
     renderEmbeddables,
     skipInliningFonts,
+<<<<<<< HEAD
+=======
+    reuseImages,
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   });
 };
 

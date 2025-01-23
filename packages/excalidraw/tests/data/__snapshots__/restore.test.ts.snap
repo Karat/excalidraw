@@ -352,6 +352,10 @@ exports[`restoreElements > should restore text element correctly with unknown fo
   "containerId": null,
   "customData": undefined,
   "fillStyle": "solid",
+<<<<<<< HEAD
+=======
+  "font": "10 unknown",
+>>>>>>> 840f1428c49e3dffa6474743ca2677b7697638db
   "fontFamily": 5,
   "fontSize": 10,
   "frameId": null,
