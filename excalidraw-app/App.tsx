@@ -1105,6 +1105,9 @@ type FirebaseConfig = {
   databaseURL: string;
   projectId: string;
   storageBucket: string;
+  emulator?: {
+    host: string;
+  };
 };
 
 type RoomLinkData = { roomId: string; roomKey: string } | null;
