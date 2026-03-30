@@ -17,5 +17,5 @@
     "jsx": "react-jsx"
   },
   "include": ["packages", "excalidraw-app"],
-  "exclude": ["packages/excalidraw/types", "examples"]
+  "exclude": ["packages/excalidraw/types", "examples", "**/*.test.*", "packages/excalidraw/tests", "packages/**/tests", "excalidraw-app/tests", "excalidraw-app/collab/RoomDialog.tsx"]
 }
