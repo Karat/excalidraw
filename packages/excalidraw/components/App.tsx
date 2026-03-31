@@ -3032,7 +3032,7 @@ class App extends React.Component<AppProps, AppState> {
           try {
             const { elements: skeletonElements, files } =
               await api.parseMermaidToExcalidraw(data.text);
-            
+
             // @ts-ignore
             const elements = convertToExcalidrawElements(skeletonElements, {
               regenerateIds: true,

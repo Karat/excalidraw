@@ -37,7 +37,6 @@ const { sassPlugin } = require("esbuild-sass-plugin");
 //   return files;
 // }
 
-
 const rawConfig = {
   entryPoints: ["excalidraw-app/App.tsx"],
   bundle: true,
@@ -51,7 +50,7 @@ const rawConfig = {
   // Maybe be a better solution available with dedupe at the link below,
   // but this will do for now.
   // https://github.com/evanw/esbuild/issues/3419
-  external: ['react', 'react-dom', 'use-sync-external-store'],
+  external: ["react", "react-dom", "use-sync-external-store"],
 };
 
 const createESMRawBuild = async () => {
@@ -81,7 +80,7 @@ const createCJSBuild = async () => {
   // Development unminified build with source maps
   await build({
     ...rawConfig,
-    format: 'cjs',
+    format: "cjs",
     sourcemap: true,
     outdir: "dist/cjs/dev", // Output directory for CJS dev build
     define: {

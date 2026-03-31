@@ -1,6 +1,6 @@
 {
-  "name": "excalidraw_karat",
-  "version": "0.0.27",
+  "name": "@karat/excalidraw",
+  "version": "0.0.28",
   "type": "module",
   "exports": {
     ".": {
@@ -15,7 +15,8 @@
   },
   "types": "./dist/excalidraw/index.d.ts",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
   },
   "description": "Excalidraw as a React component",
   "repository": "https://github.com/excalidraw/excalidraw",

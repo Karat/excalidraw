@@ -6,7 +6,6 @@ import ExcalidrawApp from "./App";
 import "../excalidraw-app/sentry";
 import type {
   AppState,
-  BinaryFiles,
   ExcalidrawImperativeAPI,
 } from "../packages/excalidraw/types";
 import type { SyncableExcalidrawElement } from "./data";
@@ -16,7 +15,8 @@ const root = createRoot(rootElement);
 // registerSW();
 
 function App() {
-  const [excalidrawAPI, setExcalidrawAPI] =
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_excalidrawAPI, setExcalidrawAPI] =
     useState<ExcalidrawImperativeAPI | null>(null);
   const excalidrawAPIRefCallback = useCallback(
     (value: ExcalidrawImperativeAPI) => setExcalidrawAPI(value),
@@ -27,6 +27,7 @@ function App() {
       elements: readonly SyncableExcalidrawElement[],
       appState: AppState,
     ) => {
+      // eslint-disable-next-line no-console
       console.log("Collab room save");
     },
     [],

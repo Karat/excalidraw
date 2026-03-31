@@ -19,13 +19,13 @@ import {
   encryptData,
   decryptData,
 } from "../../packages/excalidraw/data/encryption";
-import { ENV, MIME_TYPES } from "../../packages/excalidraw/constants";
+import { MIME_TYPES } from "../../packages/excalidraw/constants";
 import type { SyncableExcalidrawElement } from ".";
 import { getSyncableElements } from ".";
 import type { ResolutionType } from "../../packages/excalidraw/utility-types";
 import type { Socket } from "socket.io-client";
 import type { RemoteExcalidrawElement } from "../../packages/excalidraw/data/reconcile";
-import { customFirebaseConfig, customFirebaseToken} from "../App";
+import { customFirebaseConfig, customFirebaseToken } from "../App";
 
 // private
 // -----------------------------------------------------------------------------
@@ -41,13 +41,24 @@ const _loadFirebase = async () => {
   const firebase = (
     await import(/* webpackChunkName: "firebase" */ "firebase/app")
   ).default;
-  await import(/* webpackChunkName: "firebase" */ "firebase/auth");
 
   await import(/* webpackChunkName: "firebase" */ "firebase/auth");
 
   if (!isFirebaseInitialized) {
     try {
       firebase.initializeApp(customFirebaseConfig);
+
+      // Apply auth emulator HTTPS hack if the parent app is using the emulator
+      if (customFirebaseConfig.emulator) {
+        const { host } = customFirebaseConfig.emulator;
+        const auth = firebase.auth();
+        auth.useEmulator(`https://auth.${host}`);
+        // @ts-ignore - Accessing private property to force host to use HTTPS
+        const config = auth.config;
+        if (config && config.emulator) {
+          config.emulator.url = `https://auth.${host}/identitytoolkit.googleapis.com/v1/`;
+        }
+      }
       try {
         try {
           await firebase.auth().signInWithCustomToken(customFirebaseToken);
@@ -73,6 +84,7 @@ const _loadFirebase = async () => {
         throw error;
       }
     }
+
     isFirebaseInitialized = true;
   }
 
@@ -100,6 +112,15 @@ const loadFirestore = async () => {
   if (firestorePromise !== true) {
     await firestorePromise;
     firestorePromise = true;
+
+    // Configure Firestore to connect to the emulator via HTTPS
+    if (customFirebaseConfig.emulator) {
+      firebase.firestore().settings({
+        host: `firestore.${customFirebaseConfig.emulator.host}`,
+        ssl: true,
+        merge: true,
+      });
+    }
   }
   return firebase;
 };
@@ -114,6 +135,12 @@ export const loadFirebaseStorage = async () => {
   if (firebaseStoragePromise !== true) {
     await firebaseStoragePromise;
     firebaseStoragePromise = true;
+
+    // Point Storage at the emulator via HTTPS
+    if (customFirebaseConfig.emulator) {
+      // @ts-ignore - Accessing private property to force host to use HTTPS
+      firebase.storage()._delegate._host = `https://storage.${customFirebaseConfig.emulator.host}`;
+    }
   }
   return firebase;
 };
@@ -333,7 +360,10 @@ export const loadFilesFromFirebase = async (
   await Promise.all(
     [...new Set(filesIds)].map(async (id) => {
       try {
-        const url = `https://firebasestorage.googleapis.com/v0/b/${
+        const storageHost = customFirebaseConfig.emulator
+          ? `storage.${customFirebaseConfig.emulator.host}`
+          : "firebasestorage.googleapis.com";
+        const url = `https://${storageHost}/v0/b/${
           customFirebaseConfig.storageBucket
         }/o/${encodeURIComponent(prefix.replace(/^\//, ""))}%2F${id}`;
         const response = await fetch(`${url}?alt=media`);

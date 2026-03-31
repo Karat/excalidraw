@@ -11,24 +11,24 @@ import ExcalidrawApp from "../App";
 
 describe("Test LanguageList", () => {
   it("rerenders UI on language change", async () => {
-      await render(
-        <ExcalidrawApp
-          firebaseConfig={{
-            apiKey: "",
-            authDomain: "",
-            databaseURL: "",
-            projectId: "",
-            storageBucket: "",
-          }}
-          collabServerUrl="https://test.com"
-          roomLinkData={null}
-          username={""}
-          theme="dark"
-          excalidrawAPIRefCallback={() => {}}
-          firebaseToken=""
-          onCollabRoomSave={() => Promise.resolve()}
-        />,
-      );
+    await render(
+      <ExcalidrawApp
+        firebaseConfig={{
+          apiKey: "",
+          authDomain: "",
+          databaseURL: "",
+          projectId: "",
+          storageBucket: "",
+        }}
+        collabServerUrl="https://test.com"
+        roomLinkData={null}
+        username={""}
+        theme="dark"
+        excalidrawAPIRefCallback={() => {}}
+        firebaseToken=""
+        onCollabRoomSave={() => Promise.resolve()}
+      />,
+    );
     // select rectangle tool to show properties menu
     UI.clickTool("rectangle");
     // english lang should display `thin` label
