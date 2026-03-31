@@ -25,7 +25,7 @@ import { getSyncableElements } from ".";
 import type { ResolutionType } from "../../packages/excalidraw/utility-types";
 import type { Socket } from "socket.io-client";
 import type { RemoteExcalidrawElement } from "../../packages/excalidraw/data/reconcile";
-import { customFirebaseConfig, customFirebaseToken} from "../App";
+import { customFirebaseConfig, customFirebaseToken } from "../App";
 
 // private
 // -----------------------------------------------------------------------------
@@ -138,10 +138,8 @@ export const loadFirebaseStorage = async () => {
 
     // Point Storage at the emulator via HTTPS
     if (customFirebaseConfig.emulator) {
-      firebase.storage().useEmulator(
-        `storage.${customFirebaseConfig.emulator.host}`,
-        443,
-      );
+      // @ts-ignore - Accessing private property to force host to use HTTPS
+      firebase.storage()._delegate._host = `https://storage.${customFirebaseConfig.emulator.host}`;
     }
   }
   return firebase;
