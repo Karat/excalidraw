@@ -72,7 +72,7 @@
     "test:typecheck": "tsc",
     "test:update": "yarn test:app --update --watch=false",
     "test": "yarn test:app",
-    "test:coverage": "vitest --coverage --coverage.reporter=json-summary --coverage.reporter=json --coverage.reporter=text --watch=false",
+    "test:coverage": "vitest --coverage",
     "test:coverage:watch": "vitest --coverage --watch",
     "test:ui": "yarn test --ui --coverage.enabled=true",
     "autorelease": "node scripts/autorelease.js",

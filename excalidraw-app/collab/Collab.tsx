@@ -90,7 +90,6 @@ import type {
 } from "../../packages/excalidraw/data/reconcile";
 import { customCollabServerUrl, onCollabRoomSave } from "../App";
 
-
 export const collabAPIAtom = atom<CollabAPI | null>(null);
 export const isCollaboratingAtom = atom(false);
 export const isOfflineAtom = atom(false);

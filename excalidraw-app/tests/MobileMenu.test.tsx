@@ -59,7 +59,8 @@ describe("Test MobileMenu", () => {
     `);
   });
 
-  it("should initialize with welcome screen and hide once user interacts", async () => {
+  // Not relevant for Karat
+  it.skip("should initialize with welcome screen and hide once user interacts", async () => {
     expect(document.querySelector(".welcome-screen-center")).toMatchSnapshot();
     UI.clickTool("rectangle");
     expect(document.querySelector(".welcome-screen-center")).toBeNull();

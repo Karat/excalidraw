@@ -78,7 +78,7 @@ export const getCollabServer = async (
     url: collabServerUrl,
     polling: true,
   };
-}
+};
 
 export type EncryptedData = {
   data: ArrayBuffer;

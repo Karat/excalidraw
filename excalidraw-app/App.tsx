@@ -12,7 +12,6 @@ import {
 } from "../packages/excalidraw/constants";
 import { loadFromBlob } from "../packages/excalidraw/data/blob";
 import type {
-  ExcalidrawElement,
   FileId,
   NonDeletedExcalidrawElement,
   OrderedExcalidrawElement,
@@ -42,7 +41,6 @@ import {
   isTestEnv,
   preventUnload,
   resolvablePromise,
-  isRunningInIframe,
 } from "../packages/excalidraw/utils";
 import {
   FIREBASE_STORAGE_PREFIXES,
@@ -56,11 +54,7 @@ import Collab, {
   isCollaboratingAtom,
   isOfflineAtom,
 } from "./collab/Collab";
-import {
-  exportToBackend,
-  isCollaborationLink,
-  loadScene,
-} from "./data";
+import { exportToBackend, isCollaborationLink, loadScene } from "./data";
 import type { SyncableExcalidrawElement } from "./data";
 import {
   importFromLocalStorage,
@@ -69,10 +63,7 @@ import {
 import CustomStats from "./CustomStats";
 import type { RestoredDataState } from "../packages/excalidraw/data/restore";
 import { restore, restoreAppState } from "../packages/excalidraw/data/restore";
-import {
-  ExportToExcalidrawPlus,
-  exportToExcalidrawPlus,
-} from "./components/ExportToExcalidrawPlus";
+import { exportToExcalidrawPlus } from "./components/ExportToExcalidrawPlus";
 import { updateStaleImageStatuses } from "./data/FileManager";
 import { newElementWith } from "../packages/excalidraw/element/mutateElement";
 import { isInitializedImageElement } from "../packages/excalidraw/element/typeChecks";
@@ -214,7 +205,7 @@ const initializeScene = async (opts: {
     scrollToContent?: boolean;
   } = await loadScene(null, null, localDataState);
 
-  let roomLinkData = customRoomLinkData
+  let roomLinkData = customRoomLinkData;
   const isExternalScene = !!(id || jsonBackendMatch || roomLinkData);
   if (isExternalScene) {
     if (
@@ -1118,7 +1109,6 @@ let customCollabServerUrl: string;
 let customFirebaseConfig: FirebaseConfig;
 let customRoomLinkData: RoomLinkData;
 let customUsername: string;
-let customTheme: Theme;
 let externalExcalidrawRefCallback: SetExcalidrawAPI;
 let onCollabRoomSave: (
   elements: readonly SyncableExcalidrawElement[],
@@ -1142,9 +1132,8 @@ const ExcalidrawApp: React.FC<{
   customCollabServerUrl = props.collabServerUrl;
   customRoomLinkData = props.roomLinkData;
   customUsername = props.username;
-  customTheme = props.theme;
   externalExcalidrawRefCallback = props.excalidrawAPIRefCallback;
-  customFirebaseToken= props.firebaseToken;
+  customFirebaseToken = props.firebaseToken;
   onCollabRoomSave = props.onCollabRoomSave;
   return (
     <TopErrorBoundary>
@@ -1160,6 +1149,6 @@ export {
   customFirebaseConfig,
   customFirebaseToken,
   onCollabRoomSave,
-  ExcalidrawApp
+  ExcalidrawApp,
 };
 export default ExcalidrawApp;

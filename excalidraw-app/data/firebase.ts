@@ -19,7 +19,7 @@ import {
   encryptData,
   decryptData,
 } from "../../packages/excalidraw/data/encryption";
-import { ENV, MIME_TYPES } from "../../packages/excalidraw/constants";
+import { MIME_TYPES } from "../../packages/excalidraw/constants";
 import type { SyncableExcalidrawElement } from ".";
 import { getSyncableElements } from ".";
 import type { ResolutionType } from "../../packages/excalidraw/utility-types";

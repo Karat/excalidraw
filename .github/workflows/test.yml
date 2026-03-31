@@ -1,12 +1,19 @@
 name: Tests
 
 on:
+  pull_request:
   push:
-    branches: master
+    branches:
+      - master
+      - karat
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js 18.x
