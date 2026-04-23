@@ -1,94 +1,124 @@
+const path = require("path");
+const fs = require("fs");
+const { pathToFileURL } = require("url");
+
 const { build } = require("esbuild");
 const { sassPlugin } = require("esbuild-sass-plugin");
 
-// Will be used later for treeshaking
-//const fs = require("fs");
-// const path = require("path");
+const { parseEnvVariables } = require("../packages/excalidraw/env.cjs");
 
-// function getFiles(dir, files = []) {
-//   const fileList = fs.readdirSync(dir);
-//   for (const file of fileList) {
-//     const name = `${dir}/${file}`;
-//     if (
-//       name.includes("node_modules") ||
-//       name.includes("config") ||
-//       name.includes("package.json") ||
-//       name.includes("main.js") ||
-//       name.includes("index-node.ts") ||
-//       name.endsWith(".d.ts")
-//     ) {
-//       continue;
-//     }
+const ENV_VARS = {
+  development: {
+    ...parseEnvVariables(`${__dirname}/../.env.development`),
+    DEV: true,
+  },
+  production: {
+    ...parseEnvVariables(`${__dirname}/../.env.production`),
+    PROD: true,
+  },
+};
 
-//     if (fs.statSync(name).isDirectory()) {
-//       getFiles(name, files);
-//     } else if (
-//       !(
-//         name.match(/\.(sa|sc|c)ss$/) ||
-//         name.match(/\.(woff|woff2|eot|ttf|otf)$/) ||
-//         name.match(/locales\/[^/]+\.json$/)
-//       )
-//     ) {
-//       continue;
-//     } else {
-//       files.push(name);
-//     }
-//   }
-//   return files;
-// }
+// Resolve a relative path from the source file's directory
+const resolveRelativePath = (importPath, sourceFile) => {
+  const sourceDir = path.dirname(sourceFile);
+  const extensions = [".scss", ".css", ""];
 
-const rawConfig = {
-  entryPoints: ["excalidraw-app/App.tsx"],
+  for (const ext of extensions) {
+    const fullPath = path.resolve(sourceDir, importPath + ext);
+    if (fs.existsSync(fullPath)) {
+      return fullPath;
+    }
+    // Try with underscore prefix for partials
+    const partialPath = path.join(
+      path.dirname(fullPath),
+      `_${path.basename(fullPath)}`,
+    );
+    if (fs.existsSync(partialPath)) {
+      return partialPath;
+    }
+  }
+  return null;
+};
+
+// Precompile function to convert relative paths to absolute paths
+const precompile = (source, sourcePath) => {
+  // Match @use and @forward statements with relative paths
+  const importRegex = /(@use|@forward)\s+["'](\.[^"']+)["']/g;
+
+  return source.replace(importRegex, (match, directive, importPath) => {
+    const resolvedPath = resolveRelativePath(importPath, sourcePath);
+    if (resolvedPath) {
+      // Convert to file:// URL format for sass
+      const fileUrl = pathToFileURL(resolvedPath).href;
+      return `${directive} "${fileUrl}"`;
+    }
+    return match;
+  });
+};
+
+// excludes all external dependencies and bundles only the source code
+const getConfig = (outdir) => ({
+  outdir,
   bundle: true,
+  splitting: true,
   format: "esm",
-  plugins: [sassPlugin()],
+  packages: "external",
+  plugins: [
+    sassPlugin({
+      precompile,
+    }),
+  ],
+  target: "es2020",
+  assetNames: "[dir]/[name]",
+  chunkNames: "[dir]/[name]-[hash]",
+  alias: {
+    "@excalidraw/utils": path.resolve(__dirname, "../packages/utils/src"),
+  },
+  external: ["@excalidraw/common", "@excalidraw/element", "@excalidraw/math"],
   loader: {
-    ".json": "copy",
     ".woff2": "file",
   },
-  // These must be here otherwise we get duplicate versions of react errors in Hyperpad.
-  // Maybe be a better solution available with dedupe at the link below,
-  // but this will do for now.
-  // https://github.com/evanw/esbuild/issues/3419
-  external: ["react", "react-dom", "use-sync-external-store"],
-};
+});
+
+function buildDev(config) {
+  return build({
+    ...config,
+    sourcemap: true,
+    define: {
+      "import.meta.env": JSON.stringify(ENV_VARS.development),
+    },
+  });
+}
+
+function buildProd(config) {
+  return build({
+    ...config,
+    minify: true,
+    define: {
+      "import.meta.env": JSON.stringify(ENV_VARS.production),
+    },
+  });
+}
 
 const createESMRawBuild = async () => {
-  // Development unminified build with source maps
-  await build({
-    ...rawConfig,
-    sourcemap: true,
-    outdir: "dist/dev",
-    define: {
-      "import.meta.env": JSON.stringify({ DEV: true }),
-    },
+  const chunksConfig = {
+    entryPoints: ["index.tsx", "../../excalidraw-app/App.tsx", "**/*.chunk.ts"],
+    entryNames: "[name]",
+  };
+
+  // development unminified build with source maps
+  await buildDev({
+    ...getConfig("dist/dev"),
+    ...chunksConfig,
   });
 
-  // production minified build without sourcemaps
-  await build({
-    ...rawConfig,
-    minify: true,
-    outdir: "dist/prod",
-    define: {
-      "import.meta.env": JSON.stringify({ PROD: true }),
-    },
+  // production minified buld without sourcemaps
+  await buildProd({
+    ...getConfig("dist/prod"),
+    ...chunksConfig,
   });
 };
 
-// Function to create CJS build
-const createCJSBuild = async () => {
-  // Development unminified build with source maps
-  await build({
-    ...rawConfig,
-    format: "cjs",
-    sourcemap: true,
-    outdir: "dist/cjs/dev", // Output directory for CJS dev build
-    define: {
-      "import.meta.env": JSON.stringify({ DEV: true }),
-    },
-  });
-};
-
-// Call the function to create the CJS build
-createCJSBuild();
-createESMRawBuild();
+(async () => {
+  await createESMRawBuild();
+})();
