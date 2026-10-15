@@ -12,7 +12,10 @@ import { restore } from "../../packages/excalidraw/data/restore";
 import type { ImportedDataState } from "../../packages/excalidraw/data/types";
 import type { SceneBounds } from "../../packages/excalidraw/element/bounds";
 import { isInvisiblySmallElement } from "../../packages/excalidraw/element/sizeHelpers";
-import { isInitializedImageElement } from "../../packages/excalidraw/element/typeChecks";
+import {
+  isInitializedImageElement,
+  isTextElement,
+} from "../../packages/excalidraw/element/typeChecks";
 import type {
   ExcalidrawElement,
   FileId,
@@ -47,6 +50,10 @@ export const isSyncableElement = (
     if (element.updated > Date.now() - DELETED_ELEMENT_TIMEOUT) {
       return true;
     }
+    return false;
+  }
+  // Receivers restore empty text as deleted with a bumped version that outranks the real edit
+  if (isTextElement(element) && !element.text) {
     return false;
   }
   return !isInvisiblySmallElement(element);
